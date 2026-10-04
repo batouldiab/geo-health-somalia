@@ -1,0 +1,14 @@
+# One container: Nginx serving the built frontend (map + finder), the data files and the
+# speech model. No API, no server-side code: everything the user sees runs in the browser.
+services:
+  web:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.nginx
+    image: ghcr.io/${GITHUB_OWNER:-CHANGE_ME}/geo-health-somalia-web:${TAG:-latest}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/certs:/etc/nginx/certs:ro
+    restart: unless-stopped

@@ -1,0 +1,51 @@
+1
+00:00:00,000 --> 00:00:04,000
+One static site, one data pipeline, no server code.
+
+2
+00:00:04,000 --> 00:00:08,000
+A Vite–TypeScript app; the finder installs on the phone and runs with the radio off.
+
+3
+00:00:08,000 --> 00:00:14,000
+The pipeline is Python, geopandas and rasterio: WorldPop, Malaria Atlas travel time, WHO and OpenStreetMap facilities, ESA land cover, Google Open Buildings —
+
+4
+00:00:14,000 --> 00:00:20,000
+— snapped onto NexaSEE's ten-kilometre grid: 272 squares, 250 kilobytes.
+
+5
+00:00:20,000 --> 00:00:25,000
+On the phone, one model: Whisper tiny, 41 megabytes, in the browser via transformers.js and ONNX Runtime. It only transcribes.
+
+6
+00:00:25,000 --> 00:00:30,000
+A spelling-tolerant matcher over 444 place names, twelve fixed sentences
+
+7
+00:00:30,000 --> 00:00:33,500
+and a slot-filled slip do the rest:
+
+8
+00:00:33,500 --> 00:00:36,000
+nothing on the phone can invent a fact.
+
+9
+00:00:36,000 --> 00:00:40,000
+Built in a weekend on NexaSEE's open-source geo-somalia map.
+
+10
+00:00:40,000 --> 00:00:44,000
+Google's building detector checks every listed facility and finds villages far from care.
+
+11
+00:00:44,000 --> 00:00:47,500
+A test pushes 5,593 questions through the matcher: zero wrong answers without a confirmation.
+
+12
+00:00:47,500 --> 00:00:50,000
+CI runs it on every push.
+
+13
+00:00:50,000 --> 00:00:58,000
+Next: an SMS short code carries a clinic's question to a volunteer doctor and back; de-identified answers become an offline protocol library.

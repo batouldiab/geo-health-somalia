@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1720 888" role="img" aria-label="Flow from open data sources through one pipeline into five analysis layers, the geo-AI index and shortlists, and the decisions a planner, a health worker and the proposed SMS bridge to Doctors Without Borders make; guardrails apply on every path and new data flows back in." xmlns="http://www.w3.org/2000/svg" style="font-family:'Source Sans 3','Segoe UI',sans-serif;color:#1d2a2e;background:#fff" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpmMTEzZWFkNy1iMjQ1LTRmYTktOWNiZi1hMDBkMzEyMmM4NDEAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaBPExpoq5mvgXLglqV01ZxAAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDpkNTkzNjFkYy05ZWFmLTQwZjYtYTVmYi02NTYyNjdiZDI1OTVscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoxV53BSJJGL/T5BVBJct+WAAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFgg6AAYvLLUdb5P+kHVFdEHCxzoe9Z8YeWuqQotxJQZH6mkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaOlMF5X/zr2tyYu/tV3D9H4AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIMRrzFY/SznabSVHOZ/eP14TFqne1SuWvEUJ5cnYKCPYZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GQInZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmYxMTNlYWQ3LWIyNDUtNGZhOS05Y2JmLWEwMGQzMTIyYzg0MS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmVjYmExNDkzLTAwNmMtNGRhZi1iMzc3LTg2NzNjMDcxOWQwMXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCDoABi8stR1vk/6QdUV0QcLHOh71nxh5a6pCi3ElBkfqaJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggCb47f06t6GbEwLfdY4wAmBd3qvjqWGzfIYakhXLhrwGiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggGkKFq0ep2U88lBjSVofzjXJul8ifZleQ4heKuc56HWR0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQObYNXOWUxPN86N9roqHlg0ZBZ1tqyeyyH3LK7XNlRPGZKBI5iVcZpcOxWXkiDnJQkjsJw3TClrRBhmV7LV75TU=</c2pa:manifest></metadata>
+<style>/* SVG styling by class (CSS lives in the page, not inside the svg) */
+.box rect { fill: #ffffff; stroke: #b9c3c6; stroke-width: 1.2; }
+.box.src rect { fill: #ffffff; }
+.box.step rect { fill: #dcecf2; stroke: #0e6f8f; }
+.box.layer rect { fill: #e8efe9; }
+.box.ai rect { fill: #e9e6f4; }
+.box.platform rect { fill: #ebe7f6; stroke: #5b4a9c; }
+.sw.platform { background: #ebe7f6; border-color: #5b4a9c; }
+.box.out rect { fill: #ffffff; stroke: #0e6f8f; stroke-width: 1.6; }
+.box.proposed rect { fill: #fbead3; stroke: #b8650a; stroke-dasharray: 5 4; }
+.box.frame rect { fill: none; }
+.box.loopstep rect { fill: #ffffff; stroke: #b8650a; stroke-width: 1; }
+.box text.t { font-weight: 700; font-size: 14px; fill: currentColor; }
+.box text.b { font-size: 12.5px; fill: currentColor; }
+.box text.tag { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; fill: #5d6b70; }
+.box.proposed text.tag { fill: #b8650a; }
+text.h { font-family: 'IBM Plex Sans Condensed','Arial Narrow',sans-serif; font-size: 17px; font-weight: 600; fill: currentColor; }
+text.hs { font-size: 12px; fill: #5d6b70; }
+line.hl { stroke: #b9c3c6; stroke-width: 1.5; }
+.arrow { fill: none; stroke: #0e6f8f; stroke-width: 2; }
+.arrow.thin { stroke-width: 1.3; }
+.arrow.step { stroke: #0e6f8f; }
+.arrow.loop { stroke: #b8650a; stroke-width: 1.6; }
+.arrow.back { stroke: #5d6b70; stroke-width: 1.8; }
+.mk-flow, .mk-step { fill: #0e6f8f; } .mk-loop { fill: #b8650a; } .mk-back { fill: #5d6b70; }
+text.al { font-size: 12px; font-weight: 600; fill: #5d6b70; }
+.guard rect { fill: #eef2d9; stroke: #3f4f1b; stroke-width: 1; }
+.guard text.gt { font-family: 'IBM Plex Sans Condensed','Arial Narrow',sans-serif; font-size: 14px; font-weight: 600; fill: #3f4f1b; }
+.guard text.gb { font-size: 12.5px; fill: #3f4f1b; }
+svg{background:#fff}</style>
+<defs>
+<marker id="ah-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-flow"/></marker>
+<marker id="ah-step" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-step"/></marker>
+<marker id="ah-loop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-loop"/></marker>
+<marker id="ah-back" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-back"/></marker>
+</defs>
+<text class="h" x="20" y="40">1  Open data in</text><text class="hs" x="20" y="58">every source public, dated, licensed</text><line class="hl" x1="20" y1="66" x2="350" y2="66"/>
+<text class="h" x="390" y="40">2  Fundamental data analysis</text><text class="hs" x="390" y="58">one grid, one licence per file, cross-checked</text><line class="hl" x1="390" y1="66" x2="640" y2="66"/>
+<text class="h" x="680" y="40">3  Multilayer analysis</text><text class="hs" x="680" y="58">five layers on the same 10 × 10 km squares</text><line class="hl" x1="680" y1="66" x2="980" y2="66"/>
+<text class="h" x="1020" y="40">4  Geo-AI statistical analytics</text><text class="hs" x="1020" y="58">index, shortlists, AI readings of the figures</text><line class="hl" x1="1020" y1="66" x2="1320" y2="66"/>
+<text class="h" x="1360" y="40">5  Decisions</text><text class="hs" x="1360" y="58">a person makes every call</text><line class="hl" x1="1360" y1="66" x2="1700" y2="66"/>
+<path class="arrow step" d="M515.0,214 L515.0,238" marker-end="url(#ah-step)"/>
+<path class="arrow step" d="M515.0,360 L515.0,384" marker-end="url(#ah-step)"/>
+<path class="arrow step" d="M515.0,490 L515.0,514" marker-end="url(#ah-step)"/>
+<path class="arrow step" d="M515.0,636 L515.0,660" marker-end="url(#ah-step)"/>
+<g class="box proposed frame"><rect x="1360" y="342" width="340" height="276" rx="8"/><text class="t" x="1372" y="366">SMS bridge to Doctors Without Borders</text><text class="tag" x="1688" y="611" text-anchor="end">proposed · not built yet</text></g>
+<g class="box loopstep"><rect x="1368" y="376" width="324" height="30" rx="5"/><text class="b" x="1380" y="395">1  Clinic texts a question, free (donor-paid line)</text></g>
+<path class="arrow loop" d="M1392,406 L1392,413" marker-end="url(#ah-loop)"/>
+<g class="box loopstep"><rect x="1368" y="414" width="324" height="30" rx="5"/><text class="b" x="1380" y="433">2  AI: urgency, Somali → English, names blocked</text></g>
+<path class="arrow loop" d="M1392,444 L1392,451" marker-end="url(#ah-loop)"/>
+<g class="box loopstep"><rect x="1368" y="452" width="324" height="30" rx="5"/><text class="b" x="1380" y="471">3  A volunteer doctor (MSF member) replies here</text></g>
+<path class="arrow loop" d="M1392,482 L1392,489" marker-end="url(#ah-loop)"/>
+<g class="box loopstep"><rect x="1368" y="490" width="324" height="30" rx="5"/><text class="b" x="1380" y="509">4  Reply goes back by SMS, in Somali</text></g>
+<path class="arrow loop" d="M1392,520 L1392,527" marker-end="url(#ah-loop)"/>
+<g class="box loopstep"><rect x="1368" y="528" width="324" height="30" rx="5"/><text class="b" x="1380" y="547">5  Logged: which facility, which doctor, when</text></g>
+<path class="arrow loop" d="M1392,558 L1392,565" marker-end="url(#ah-loop)"/>
+<g class="box loopstep"><rect x="1368" y="566" width="324" height="30" rx="5"/><text class="b" x="1380" y="585">6  Question → a dot on the map, the need layer</text></g>
+<path class="arrow loop" d="M1692,581.0 L1709,581.0 L1709,391.0 L1694,391.0" marker-end="url(#ah-loop)" stroke-dasharray="4 4"/>
+<path class="arrow flow thin" d="M350,152.0 L372,152.0"/>
+<path class="arrow flow thin" d="M350,284.0 L372,284.0"/>
+<path class="arrow flow thin" d="M350,384.0 L372,384.0"/>
+<path class="arrow flow thin" d="M350,484.0 L372,484.0"/>
+<path class="arrow flow thin" d="M350,608.0 L372,608.0"/>
+<path class="arrow flow thin" d="M350,724.0 L372,724.0"/>
+<path class="arrow flow" d="M372,152.0 L372,724.0"/>
+<path class="arrow flow" d="M372,154.0 L388,154.0" marker-end="url(#ah-flow)"/>
+<text class="al" x="372" y="84" text-anchor="middle">download, verify</text>
+<path class="arrow flow thin" d="M640,438.0 L662,438.0"/>
+<path class="arrow flow" d="M662,138.0 L662,594.0"/>
+<path class="arrow flow thin" d="M662,138.0 L678,138.0" marker-end="url(#ah-flow)"/>
+<path class="arrow flow thin" d="M662,246.0 L678,246.0" marker-end="url(#ah-flow)"/>
+<path class="arrow flow thin" d="M662,354.0 L678,354.0" marker-end="url(#ah-flow)"/>
+<path class="arrow flow thin" d="M662,470.0 L678,470.0" marker-end="url(#ah-flow)"/>
+<path class="arrow flow thin" d="M662,594.0 L678,594.0" marker-end="url(#ah-flow)"/>
+<text class="al" x="662" y="84" text-anchor="middle">per square</text>
+<path class="arrow flow thin" d="M980,138.0 L1002,138.0"/>
+<path class="arrow flow thin" d="M980,246.0 L1002,246.0"/>
+<path class="arrow flow thin" d="M980,354.0 L1002,354.0"/>
+<path class="arrow flow thin" d="M980,470.0 L1002,470.0"/>
+<path class="arrow flow thin" d="M980,594.0 L1002,594.0"/>
+<path class="arrow flow" d="M1002,138.0 L1002,594.0"/>
+<path class="arrow flow thin" d="M1002,162.0 L1018,162.0" marker-end="url(#ah-flow)"/>
+<path class="arrow flow thin" d="M1002,294.0 L1018,294.0" marker-end="url(#ah-flow)"/>
+<path class="arrow flow thin" d="M1002,402.0 L1018,402.0" marker-end="url(#ah-flow)"/>
+<path class="arrow flow thin" d="M1002,510.0 L1018,510.0" marker-end="url(#ah-flow)"/>
+<path class="arrow flow thin" d="M1002,618.0 L1018,618.0" marker-end="url(#ah-flow)"/>
+<text class="al" x="1002" y="84" text-anchor="middle">five layers in</text>
+<path class="arrow flow thin" d="M1320,162.0 L1342,162.0"/>
+<path class="arrow flow thin" d="M1320,294.0 L1342,294.0"/>
+<path class="arrow flow thin" d="M1320,402.0 L1342,402.0"/>
+<path class="arrow flow thin" d="M1320,510.0 L1342,510.0"/>
+<path class="arrow flow thin" d="M1320,618.0 L1342,618.0"/>
+<path class="arrow flow" d="M1342,162.0 L1342,618.0"/>
+<path class="arrow flow thin" d="M1342,146.0 L1358,146.0" marker-end="url(#ah-flow)"/>
+<path class="arrow flow thin" d="M1342,270.0 L1358,270.0" marker-end="url(#ah-flow)"/>
+<path class="arrow flow thin" d="M1342,362 L1358,362" marker-end="url(#ah-flow)"/>
+<text class="al" x="1342" y="84" text-anchor="middle">ranked map, shortlists, answers</text>
+<path class="arrow back" d="M1530.0,618 L1530.0,794 L185.0,794 L185.0,770" marker-end="url(#ah-back)" stroke-dasharray="7 5"/>
+<text class="al" x="860.0" y="786" text-anchor="middle">new data flows back in: SMS questions and answers → need layer  ·  confirmed voice clips → open Somali and Af-Maay speech data  ·  Ministry Master Facility List (2026) loaded the day it is public</text>
+<g class="guard"><rect x="20" y="818" width="1680" height="46" rx="8"/><text class="gt" x="36" y="837">Guardrails on every path</text><text class="gb" x="36" y="854">A person makes the call  ·  "Not sure — ask a person" instead of a guess  ·  no patient name or number in any message or file  ·  every answer carries its source and date  ·  model files ≤ 41 MB, core feature works offline  ·  one language named (Somali), its gap named (Af-Maay)</text></g>
+<g class="box src">
+<rect x="20" y="84" width="330" height="136" rx="6"/>
+<text class="t" x="32" y="108">United Nations</text>
+<text class="tag" x="338" y="108" text-anchor="end">UN</text>
+<text class="b" x="32" y="128">OCHA HDX: admin boundaries, district population ·</text>
+<text class="b" x="32" y="144">WHO facility register 2021/2023 (520 points) ·</text>
+<text class="b" x="32" y="160">UNICEF schools 2022 · UNFPA SHDS 2020 survey · UN</text>
+<text class="b" x="32" y="176">SDG database: 1.2.2 poverty, 3.1.1 maternal</text>
+<text class="b" x="32" y="192">deaths, 3.2.1 under-5 deaths, 3.c.1 health</text>
+<text class="b" x="32" y="208">workers</text>
+</g>
+<g class="box src">
+<rect x="20" y="232" width="330" height="104" rx="6"/>
+<text class="t" x="32" y="256">Our World in Data</text>
+<text class="tag" x="338" y="256" text-anchor="end">OWID</text>
+<text class="b" x="32" y="276">32 Somalia indicators, 1950–2025: life</text>
+<text class="b" x="32" y="292">expectancy, maternal and child mortality,</text>
+<text class="b" x="32" y="308">physicians, electricity, internet,</text>
+<text class="b" x="32" y="324">undernourishment</text>
+</g>
+<g class="box src">
+<rect x="20" y="348" width="330" height="72" rx="6"/>
+<text class="t" x="32" y="372">WorldPop</text>
+<text class="tag" x="338" y="372" text-anchor="end">population</text>
+<text class="b" x="32" y="392">100 m population 2020 (constrained) · 2015–2030</text>
+<text class="b" x="32" y="408">grid already on the platform</text>
+</g>
+<g class="box src">
+<rect x="20" y="432" width="330" height="104" rx="6"/>
+<text class="t" x="32" y="456">Satellite</text>
+<text class="tag" x="338" y="456" text-anchor="end">space</text>
+<text class="b" x="32" y="476">ESA WorldCover 2021, 10 m land cover · Google</text>
+<text class="b" x="32" y="492">Open Buildings V3: 55,985 buildings in Bakool&#x27;s</text>
+<text class="b" x="32" y="508">squares · VIIRS night lights on the NexaSEE</text>
+<text class="b" x="32" y="524">platform</text>
+</g>
+<g class="box src">
+<rect x="20" y="548" width="330" height="120" rx="6"/>
+<text class="t" x="32" y="572">Access, places, poverty</text>
+<text class="tag" x="338" y="572" text-anchor="end">access</text>
+<text class="b" x="32" y="592">Malaria Atlas travel time 2020, walking and</text>
+<text class="b" x="32" y="608">vehicle · OpenStreetMap: 444 named places inside</text>
+<text class="b" x="32" y="624">Bakool (roads by class on the platform) · Maina</text>
+<text class="b" x="32" y="640">et al. 2019 facility database · OPHI / SNBS MPI</text>
+<text class="b" x="32" y="656">2024, Table 3.3</text>
+</g>
+<g class="box proposed">
+<rect x="20" y="680" width="330" height="88" rx="6"/>
+<text class="t" x="32" y="704">People&#x27;s voices</text>
+<text class="tag" x="338" y="704" text-anchor="end">new</text>
+<text class="b" x="32" y="724">SMS questions from facilities (proposed bridge) ·</text>
+<text class="b" x="32" y="740">public web sentiment on 32 indicators, AI-read,</text>
+<text class="b" x="32" y="756">on the NexaSEE platform</text>
+</g>
+<g class="box step">
+<rect x="390" y="94" width="250" height="120" rx="6"/>
+<text class="t" x="402" y="118">Fetch and verify</text>
+<text class="b" x="402" y="138">download each source, write a</text>
+<text class="b" x="402" y="154">checksum manifest; one file per</text>
+<text class="b" x="402" y="170">source, the licence rides on every</text>
+<text class="b" x="402" y="186">record (ODbL never merged into CC</text>
+<text class="b" x="402" y="202">BY)</text>
+</g>
+<g class="box step">
+<rect x="390" y="240" width="250" height="120" rx="6"/>
+<text class="t" x="402" y="264">Harmonise</text>
+<text class="b" x="402" y="284">snap everything to one 10 × 10 km</text>
+<text class="b" x="402" y="300">grid (272 Bakool cells, cell 0.09°)</text>
+<text class="b" x="402" y="316">and the five districts: Xudur,</text>
+<text class="b" x="402" y="332">Waajid, Tayeeglow, Ceel Barde, Rab</text>
+<text class="b" x="402" y="348">Dhuure</text>
+</g>
+<g class="box step">
+<rect x="390" y="386" width="250" height="104" rx="6"/>
+<text class="t" x="402" y="410">Zonal statistics</text>
+<text class="b" x="402" y="430">population-weighted means and shares</text>
+<text class="b" x="402" y="446">per cell: people, minutes to care,</text>
+<text class="b" x="402" y="462">lit area, land-cover classes,</text>
+<text class="b" x="402" y="478">buildings</text>
+</g>
+<g class="box step">
+<rect x="390" y="516" width="250" height="120" rx="6"/>
+<text class="t" x="402" y="540">Cross-check</text>
+<text class="b" x="402" y="560">WorldPop vs PESS 2014 vs IPC 2024</text>
+<text class="b" x="402" y="576">totals · facility register vs</text>
+<text class="b" x="402" y="592">buildings seen from space · two</text>
+<text class="b" x="402" y="608">travel-time surfaces, disagreements</text>
+<text class="b" x="402" y="624">flagged</text>
+</g>
+<g class="box step">
+<rect x="390" y="662" width="250" height="104" rx="6"/>
+<text class="t" x="402" y="686">Declare the gaps</text>
+<text class="b" x="402" y="706">no facility functional status</text>
+<text class="b" x="402" y="722">anywhere public · 4 schools listed ·</text>
+<text class="b" x="402" y="738">no Af-Maay speech model · SDI has no</text>
+<text class="b" x="402" y="754">Somalia survey</text>
+</g>
+<g class="box layer">
+<rect x="680" y="94" width="300" height="88" rx="6"/>
+<text class="t" x="692" y="118">Population analysis</text>
+<text class="b" x="692" y="138">people per square (WorldPop) · buildings and</text>
+<text class="b" x="692" y="154">279 settlement clusters from space · urban,</text>
+<text class="b" x="692" y="170">rural, nomadic and IDP totals per district</text>
+</g>
+<g class="box platform">
+<rect x="680" y="194" width="300" height="104" rx="6"/>
+<text class="t" x="692" y="218">Access-to-light analysis</text>
+<text class="b" x="692" y="238">VIIRS: share of populated area with night</text>
+<text class="b" x="692" y="254">light · dark squares read as no grid power</text>
+<text class="b" x="692" y="270">and little activity; Bakool near zero · on</text>
+<text class="b" x="692" y="286">the NexaSEE platform, not in this submission</text>
+</g>
+<g class="box layer">
+<rect x="680" y="310" width="300" height="88" rx="6"/>
+<text class="t" x="692" y="334">Poverty analysis</text>
+<text class="b" x="692" y="354">MPI incidence and intensity per region:</text>
+<text class="b" x="692" y="370">Bakool 97.4% poor, deprived in 68.7% of</text>
+<text class="b" x="692" y="386">indicators; national 67.0%</text>
+</g>
+<g class="box layer">
+<rect x="680" y="410" width="300" height="120" rx="6"/>
+<text class="t" x="692" y="434">Access-to-care analysis</text>
+<text class="b" x="692" y="454">walking and vehicle minutes to the nearest</text>
+<text class="b" x="692" y="470">listed facility · share of people beyond 60</text>
+<text class="b" x="692" y="486">and 120 min · 73 listed facility records, 11</text>
+<text class="b" x="692" y="502">health centres or MCH above health-post</text>
+<text class="b" x="692" y="518">level, none with a status</text>
+</g>
+<g class="box platform">
+<rect x="680" y="542" width="300" height="104" rx="6"/>
+<text class="t" x="692" y="566">Sentiment analysis</text>
+<text class="b" x="692" y="586">public mood on the map layers and 32</text>
+<text class="b" x="692" y="602">indicators, &#x27;data vs public&#x27; flags · on the</text>
+<text class="b" x="692" y="618">NexaSEE platform · themes of SMS questions</text>
+<text class="b" x="692" y="634">(proposed)</text>
+</g>
+<g class="box ai">
+<rect x="1020" y="94" width="300" height="136" rx="6"/>
+<text class="t" x="1032" y="118">Underserved index</text>
+<text class="b" x="1032" y="138">U = people × poverty incidence × min(1,</text>
+<text class="b" x="1032" y="154">walking minutes / 120)</text>
+<text class="b" x="1032" y="170">ranks all 272 squares and the 5 districts;</text>
+<text class="b" x="1032" y="186">48% of Bakool&#x27;s people are more than an</text>
+<text class="b" x="1032" y="202">hour&#x27;s walk from any listed facility (our</text>
+<text class="b" x="1032" y="218">estimate)</text>
+</g>
+<g class="box ai">
+<rect x="1020" y="242" width="300" height="104" rx="6"/>
+<text class="t" x="1032" y="266">Outreach shortlist</text>
+<text class="b" x="1032" y="286">99 settlements with no listed facility</text>
+<text class="b" x="1032" y="302">within 5 km and more than an hour on foot:</text>
+<text class="b" x="1032" y="318">where a mobile clinic reaches the most</text>
+<text class="b" x="1032" y="334">people</text>
+</g>
+<g class="box ai">
+<rect x="1020" y="358" width="300" height="88" rx="6"/>
+<text class="t" x="1032" y="382">Facility plausibility</text>
+<text class="b" x="1032" y="402">7 of 73 listed facilities have no building</text>
+<text class="b" x="1032" y="418">detected within 500 m: listed is not the</text>
+<text class="b" x="1032" y="434">same as open</text>
+</g>
+<g class="box platform">
+<rect x="1020" y="458" width="300" height="104" rx="6"/>
+<text class="t" x="1032" y="482">iSEE Analytics</text>
+<text class="b" x="1032" y="502">AI reading of a square, a district or the</text>
+<text class="b" x="1032" y="518">region, drawn as charts; figures computed,</text>
+<text class="b" x="1032" y="534">the model only captions · on the NexaSEE</text>
+<text class="b" x="1032" y="550">platform, not in this submission</text>
+</g>
+<g class="box proposed">
+<rect x="1020" y="574" width="300" height="88" rx="6"/>
+<text class="t" x="1032" y="598">Question-density layer</text>
+<text class="b" x="1032" y="618">what facilities ask, where and how urgent,</text>
+<text class="b" x="1032" y="634">from the SMS bridge; feeds the index as a</text>
+<text class="b" x="1032" y="650">live need signal (proposed)</text>
+</g>
+<g class="box out">
+<rect x="1360" y="94" width="340" height="104" rx="6"/>
+<text class="t" x="1372" y="118">Planner</text>
+<text class="b" x="1372" y="138">the map, no password: Bakool card in English and</text>
+<text class="b" x="1372" y="154">Somali · district card in plain words · five layer</text>
+<text class="b" x="1372" y="170">buttons · every figure with its source, date and</text>
+<text class="b" x="1372" y="186">bracket</text>
+</g>
+<g class="box out">
+<rect x="1360" y="210" width="340" height="120" rx="6"/>
+<text class="t" x="1372" y="234">Health worker&#x27;s phone</text>
+<text class="b" x="1372" y="254">offline finder: Somali voice in (Whisper tiny, 41</text>
+<text class="b" x="1372" y="270">MB), place confirmed yes/no with its score, fixed</text>
+<text class="b" x="1372" y="286">answers: nearest listed facility, higher-level</text>
+<text class="b" x="1372" y="302">facility, list date · referral slip, no names,</text>
+<text class="b" x="1372" y="318">opened in the phone&#x27;s SMS app</text>
+</g>
+</svg>

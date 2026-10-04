@@ -1,0 +1,234 @@
+# Verified open data sources for the Bakool health-access project.
+# Every URL below was opened on 2026-10-03. Record counts come from the pages
+# themselves or the HDX datastore mirror; re-check them on download.
+# Licences differ: OpenStreetMap-derived records (ODbL) are kept as separately
+# licensed records (a licence field on each) and are never combined with other
+# sources into a derived value; the places gazetteer is pure OSM. Nothing here
+# is synthetic. "status" says what the shipped data files actually use.
+
+bbox_bakool:              # south, west, north, east (generous, clips Bay/Gedo/Hiraan edges)
+  south: 3.1
+  west: 42.9
+  north: 4.9
+  east: 44.8
+
+sources:
+
+  # ---------------------------------------------------------------- facilities
+  who_health_facilities:
+    title: "Somalia - Health Facilities (WHO)"
+    page: https://data.humdata.org/dataset/somalia-health-facilities-data
+    publisher: World Health Organization (via OCHA HDX)
+    date: "XLSX 2021-06-18; SHP WHO_health_sites.zip 2023-10-02"
+    licence: CC BY-IGO
+    records: 520            # HDX datastore count for the 2021 XLSX
+    fields: [Region, District, "Health Facility", Type, Latitude, Longitude]
+    files:
+      # HDX resource download links are behind the dataset page; if an automated
+      # GET is refused, download the two files in a browser into pipeline/raw/
+      - name: who_health_facilities_2021.xlsx
+        note: "Download from the dataset page (resource 'Somalia Health Facilities' XLSX)"
+      - name: WHO_health_sites.zip
+        note: "Download from the dataset page (resource 'WHO_health_sites.zip' SHP)"
+    gaps: "No functional status, services, staff or facility IDs. The 2023 SHP may differ from the 2021 XLSX."
+
+  maina_2019_ssa_facilities:
+    title: "A spatial database of health facilities managed by the public health sector in sub-Saharan Africa (Maina et al. 2019)"
+    page: https://www.nature.com/articles/s41597-019-0142-2
+    download: https://ndownloader.figshare.com/files/14379593
+    publisher: KEMRI-Wellcome / WHO GMP (WHO/CDS/GMP/2019.01)
+    date: "2019-02-13 file; published 2019-07-16"
+    licence: CC0 (figshare)
+    records_somalia: 879      # 96% geocoded, 39 missing coordinates
+    files:
+      - name: maina_2019_ssa_mfl.xlsx
+        size_bytes: 5495174
+    gaps: "Public sector only; Somalia inputs are 2005-2013 vintage."
+
+  healthsites_somalia:
+    status: checked, not used (92 Somalia records, almost no attributes; the OSM Overpass pull below covers the same points for Bakool)
+    title: "Somalia healthsites (healthsites.io, OSM-derived)"
+    page: https://data.humdata.org/dataset/e9d3a67f-08c4-4465-9a0f-e9ab67d38bb4
+    publisher: Global Healthsites Mapping Project
+    date: "2024-02-08 (HDX); mirror copy 2025-04-10"
+    licence: ODbL
+    records: 92
+    files:
+      - name: healthsites_somalia.geojson
+        note: "Download the GeoJSON resource from the dataset page"
+    gaps: "Very small subset of OSM; most attribute fields empty."
+
+  osm_overpass_bakool:
+    title: "OpenStreetMap health sites, schools and places in the Bakool box"
+    endpoint: https://overpass-api.de/api/interpreter
+    licence: ODbL
+    query_file: pipeline/overpass_bakool.ql
+    files:
+      - name: osm_bakool.json
+    gaps: "Crowdsourced; rural Bakool coverage likely sparse."
+
+  # ---------------------------------------------------------------- population
+  worldpop_som_2020_constrained:
+    title: "WorldPop Somalia 2020, constrained, 100 m (maxar_v1)"
+    page: https://hub.worldpop.org/geodata/summary?id=49662
+    download: https://data.worldpop.org/GIS/Population/Global_2000_2020_Constrained/2020/maxar_v1/SOM/som_ppp_2020_constrained.tif
+    publisher: WorldPop, University of Southampton
+    date: 2020
+    licence: CC BY 4.0
+    doi: 10.5258/SOTON/WP00682
+    files:
+      - name: som_ppp_2020_constrained.tif
+        size_bytes: 16500000   # approx 16.5 MB
+    gaps: "Modelled projection, not a census."
+
+  ocha_cod_ps_som:
+    title: "Somalia - Subnational Population Statistics (COD-PS)"
+    page: https://data.humdata.org/dataset/cod-ps-som
+    publisher: OCHA Somalia
+    date: "2022-09-22 (v2 CSVs, 2005-2021)"
+    licence: CC BY-IGO
+    files:
+      - name: som_pplp_adm2_v2.csv
+        note: "Download from the dataset page"
+
+  # ---------------------------------------------------------------- boundaries
+  ocha_cod_ab_som:
+    title: "Somalia - Subnational Administrative Boundaries (COD-AB)"
+    page: https://data.humdata.org/dataset/cod-ab-som
+    publisher: OCHA FISS / OCHA Somalia
+    date: "edition 2026-01-26 used in the build (the 2023-03-08 edition was the one first checked)"
+    licence: CC BY-IGO
+    files:
+      - name: som_admin_boundaries.shp.zip
+        size_bytes: 2200000
+        note: "Download from the dataset page (the build used the 2026-01-26 edition, saved under this name)"
+
+  # ---------------------------------------------------------------- travel time
+  map_travel_time_2020:
+    title: "Malaria Atlas Project - accessibility to healthcare 2020 (motorized and walking)"
+    page: https://malariaatlas.org/project-resources/accessibility-to-healthcare/
+    gee_asset_walking: projects/malariaatlasproject/assets/accessibility/accessibility_to_healthcare/2019_walking_only
+    publisher: Malaria Atlas Project (Weiss et al. 2020, Nature Medicine)
+    date: 2019-2020
+    licence: "CC BY 3.0 (MAP explorer) / CC BY 4.0 (GEE catalog)"
+    resolution_m: 927.67
+    downloads:
+      motorized: "https://data.malariaatlas.org/geoserver/ows?service=CSW&version=2.0.1&request=DirectDownload&ResourceId=Explorer:2020_motorized_travel_time_to_healthcare"
+      walking:   "https://data.malariaatlas.org/geoserver/ows?service=CSW&version=2.0.1&request=DirectDownload&ResourceId=Explorer:2020_walking_only_travel_time_to_healthcare"
+    files:
+      # Each DirectDownload is a ZIP (~1.0 GB / ~0.45 GB) holding one .geotiff; the build
+      # script reads the GeoTIFF inside the zip, no extraction needed.
+      - name: map_2020_motorized_travel_time.zip
+        note: "Global file, large. Alternative: export the Bakool window from Google Earth Engine."
+      - name: map_2020_walking_travel_time.zip
+    gaps: "Facility inputs are a 2019 global list, not Bakool's register; no security or seasonal closures."
+
+  dcc_somalia_travel_time_100m:    # not used in the shipped files (undocumented facility inputs); listed for the record
+    title: "Somalia walking / motorised travel time to nearest health centre, 100 m (Data for Children Collaborative via HDX)"
+    page_mirror: https://sodma-dev.okfn.org/dataset/somalia-walking-travel-time-to-nearest-level-iv-health-centre
+    publisher: Data for Children Collaborative (CPAS)
+    licence: not stated
+    files:
+      - name: som_walking_travel_time_100m.tif
+        note: "Sensitivity check only; input facility layer undocumented"
+
+  # ---------------------------------------------------------------- land cover
+  esa_worldcover_2021_n03e042:
+    title: "ESA WorldCover 10 m 2021 v200, tile N03E042 (3-6N, 42-45E)"
+    page: https://esa-worldcover.org/en/data-access
+    download: https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N03E042_Map.tif
+    publisher: ESA WorldCover consortium (VITO)
+    date: 2021
+    licence: CC BY 4.0
+    attribution: "© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021)"
+    files:
+      - name: ESA_WorldCover_10m_2021_v200_N03E042_Map.tif
+        size_bytes: 102897255
+    classes:
+      10: Tree cover
+      20: Shrubland
+      30: Grassland
+      40: Cropland
+      50: Built-up
+      60: Bare / sparse vegetation
+      70: Snow and ice
+      80: Permanent water bodies
+      90: Herbaceous wetland
+      95: Mangroves
+      100: Moss and lichen
+    gaps: "2021 v200 and 2020 v100 use different algorithms; no change analysis."
+
+  esri_io_lulc_38n:                # not used (optional, for year-to-year change)
+    title: "Esri / Impact Observatory 10 m annual LULC, UTM supercell 38N, 2017-2024"
+    page: https://registry.opendata.aws/io-lulc/
+    download_template: "https://io-10m-annual-lulc.s3.us-west-2.amazonaws.com/38N_{year}.tif"
+    licence: CC BY 4.0
+    crs: EPSG:32638
+    years: [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
+    classes: {1: Water, 2: Trees, 4: Flooded vegetation, 5: Crops, 7: Built area, 8: Bare ground, 9: Snow/ice, 10: Clouds, 11: Rangeland}
+
+  swalim_cultivated_2025:          # not used (licence not specified)
+    title: "FAO SWALIM Cultivated Land Classification 2025 (2025_ver3_agric_clean)"
+    page: https://spatial.faoswalim.org/
+    wfs_template: "https://spatial.faoswalim.org/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typename=geonode:2025_ver3_agric_clean&outputFormat=json&srs=EPSG:4326&bbox={west},{south},{east},{north},EPSG:4326"
+    licence: not specified
+
+  # ---------------------------------------------------------------- buildings (AI-detected)
+  google_open_buildings_v3:
+    title: "Google Open Buildings V3, points (buildings detected by a deep-learning model on satellite imagery)"
+    page: https://sites.research.google/gr/open-buildings/
+    download_template: "https://storage.googleapis.com/open-buildings-data/v3/points_s2_level_4_gzip/{tile}_buildings.csv.gz"
+    tiles: [17d, 17f]          # S2 level-4 cells covering Bakool (lat 0-8.18, lon 39.98-45.00)
+    publisher: Google Research
+    date: "inference May 2023"
+    licence: "CC BY 4.0 (or ODbL 1.0, user's choice)"
+    fields: [latitude, longitude, area_in_meters, confidence, full_plus_code]
+    files:
+      - name: open_buildings_bakool.csv
+        note: "pipeline/fetch_open_buildings.py streams the two tiles (2 to 4 GB) and keeps the rows in the Bakool box"
+    gaps: "Detection misses small or temporary shelters (a lower bound in pastoral areas); confidence 0.65-1.0 is the model's own, we use >= 0.7; a building is not a household."
+
+  # ---------------------------------------------------------------- schools
+  unicef_ocha_education_2022:    # built but no longer shipped: 4 points in Bakool say nothing a planner can use; the gap is reported instead
+    title: "Somalia - Education Facilities (UNICEF list, OCHA Somalia contributor, Jan-Aug 2022)"
+    page: https://data.humdata.org/dataset/somalia-education-facilities
+    download: "https://spatial.faoswalim.org/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typename=geonode:education_facilities&outputFormat=json&srs=EPSG:4326"
+    publisher: UNICEF / OCHA Somalia (same layer mirrored on FAO SWALIM GeoServer)
+    date: 2022
+    licence: CC BY (HDX page)
+    records: 667
+    records_bakool: 4
+    files:
+      - name: education_facilities_2022.geojson
+    gaps: "Partner-supported list, not a census; Bakool has 4 points."
+
+  # ---------------------------------------------------------------- poverty
+  ophi_somalia_mpi_2024:
+    title: "Multidimensional Poverty Index for Somalia, report 2024 (OPHI and SNBS; 2022 SIHBS data)"
+    download: https://ophi.org.uk/sites/default/files/2024-12/Somalia_MPI_report_2024.pdf
+    table: "Table 3.3, p.14: Bakool H 97.4%, A 68.7%, MPI 0.669; national MPI 0.363, H 67.0%, A 54.3%; 17 regions (Middle Juba not surveyed)"
+    files:
+      - name: Somalia_MPI_report_2024.pdf
+    note: "Transcribe the 17-region table by hand into data/mpi_regions_v1.json and cite the page."
+
+  # ---------------------------------------------------------------- language models (build with)
+  whisper:
+    title: "OpenAI Whisper tiny, 8-bit ONNX export (onnx-community/whisper-tiny); Somali 'so' in the tokenizer"
+    page: https://github.com/openai/whisper
+    model: https://huggingface.co/onnx-community/whisper-tiny
+    licence: MIT
+    size_bytes: 40844231     # encoder 10,124,990 + decoder 30,719,241
+    note: "No published Somali WER for tiny. BuzzASR/somali (a large-v3 fine-tune) reports 50.96% normalised WER on a FLEURS + Common Voice test set; steja/whisper-small-somali 66.59% on FLEURS test. Hence the closed-list match and the yes/no confirmation."
+  mms_tts_som:
+    status: not shipped (no clips until a Somali speaker has cleared the sentences; the finder shows text)
+    title: "Meta MMS TTS Somali"
+    page: https://huggingface.co/facebook/mms-tts-som
+    licence: CC BY-NC 4.0
+    note: "Would synthesise the fixed answer sentences at build time; non-commercial prototype use only."
+  fleurs_so:
+    title: "FLEURS Somali (so_so): about 4,600 read sentences; dev 291 MB, test 737 MB"
+    page: https://huggingface.co/datasets/google/fleurs
+    licence: CC BY 4.0
+    note: "The only sizeable public Somali speech set; studio-read sentences, no place names, no health vocabulary. Usable as a WER calibration, not as field speech."
+  maay_gap:
+    note: "No ASR, TTS or translation model exists for Af-Maay (ISO 639-3 ymm); only facebook/mms-lid-4017 lists it."

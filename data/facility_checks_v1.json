@@ -1,0 +1,387 @@
+{
+ "checks": {
+  "f0000": {
+   "buildings_within_m": 482,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0001": {
+   "buildings_within_m": 1014,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0002": {
+   "buildings_within_m": 1206,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0003": {
+   "buildings_within_m": 287,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0004": {
+   "buildings_within_m": 3,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0005": {
+   "buildings_within_m": 409,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0006": {
+   "buildings_within_m": 191,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0007": {
+   "buildings_within_m": 0,
+   "flag": "no buildings detected nearby",
+   "radius_m": 500.0
+  },
+  "f0008": {
+   "buildings_within_m": 78,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0009": {
+   "buildings_within_m": 154,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0010": {
+   "buildings_within_m": 1,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0011": {
+   "buildings_within_m": 103,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0012": {
+   "buildings_within_m": 25,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0013": {
+   "buildings_within_m": 71,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0014": {
+   "buildings_within_m": 7,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0015": {
+   "buildings_within_m": 102,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0016": {
+   "buildings_within_m": 360,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0017": {
+   "buildings_within_m": 138,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0018": {
+   "buildings_within_m": 108,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0019": {
+   "buildings_within_m": 0,
+   "flag": "no buildings detected nearby",
+   "radius_m": 500.0
+  },
+  "f0020": {
+   "buildings_within_m": 48,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0021": {
+   "buildings_within_m": 127,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0022": {
+   "buildings_within_m": 1297,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0023": {
+   "buildings_within_m": 185,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0024": {
+   "buildings_within_m": 57,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0025": {
+   "buildings_within_m": 1306,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0026": {
+   "buildings_within_m": 155,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0027": {
+   "buildings_within_m": 78,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0028": {
+   "buildings_within_m": 444,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0029": {
+   "buildings_within_m": 50,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0030": {
+   "buildings_within_m": 240,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0031": {
+   "buildings_within_m": 0,
+   "flag": "no buildings detected nearby",
+   "radius_m": 500.0
+  },
+  "f0032": {
+   "buildings_within_m": 373,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0033": {
+   "buildings_within_m": 29,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0034": {
+   "buildings_within_m": 4,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0035": {
+   "buildings_within_m": 64,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0036": {
+   "buildings_within_m": 492,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0037": {
+   "buildings_within_m": 48,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0038": {
+   "buildings_within_m": 0,
+   "flag": "no buildings detected nearby",
+   "radius_m": 500.0
+  },
+  "f0039": {
+   "buildings_within_m": 12,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0040": {
+   "buildings_within_m": 1,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0041": {
+   "buildings_within_m": 64,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0042": {
+   "buildings_within_m": 46,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0043": {
+   "buildings_within_m": 208,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0044": {
+   "buildings_within_m": 138,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0045": {
+   "buildings_within_m": 1398,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0046": {
+   "buildings_within_m": 150,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0047": {
+   "buildings_within_m": 55,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0048": {
+   "buildings_within_m": 0,
+   "flag": "no buildings detected nearby",
+   "radius_m": 500.0
+  },
+  "f0049": {
+   "buildings_within_m": 191,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0050": {
+   "buildings_within_m": 203,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0051": {
+   "buildings_within_m": 327,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0052": {
+   "buildings_within_m": 23,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0053": {
+   "buildings_within_m": 59,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0054": {
+   "buildings_within_m": 359,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0055": {
+   "buildings_within_m": 21,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0056": {
+   "buildings_within_m": 46,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0057": {
+   "buildings_within_m": 0,
+   "flag": "no buildings detected nearby",
+   "radius_m": 500.0
+  },
+  "f0058": {
+   "buildings_within_m": 74,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0059": {
+   "buildings_within_m": 58,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0060": {
+   "buildings_within_m": 7,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0061": {
+   "buildings_within_m": 58,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0062": {
+   "buildings_within_m": 873,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0063": {
+   "buildings_within_m": 140,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0064": {
+   "buildings_within_m": 136,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0065": {
+   "buildings_within_m": 1282,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0066": {
+   "buildings_within_m": 66,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0067": {
+   "buildings_within_m": 51,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0068": {
+   "buildings_within_m": 135,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0069": {
+   "buildings_within_m": 198,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0070": {
+   "buildings_within_m": 278,
+   "flag": null,
+   "radius_m": 500.0
+  },
+  "f0071": {
+   "buildings_within_m": 0,
+   "flag": "no buildings detected nearby",
+   "radius_m": 500.0
+  },
+  "f0079": {
+   "buildings_within_m": 384,
+   "flag": null,
+   "radius_m": 500.0
+  }
+ },
+ "meta": {
+  "asof": "2026-10-04",
+  "buildings_in_box": 241970,
+  "buildings_in_region_cells": 55985,
+  "buildings_used": 192799,
+  "built": "pipeline/build_buildings_v1.py",
+  "cell_deg": 0.09,
+  "min_confidence": 0.7,
+  "note": "Counts of AI-detected buildings; a building is not a household and detection misses small or temporary shelters, so counts are a lower bound in pastoral areas.",
+  "radius_m": 500.0,
+  "region": "Bakool",
+  "source": "Google Open Buildings V3 (points), inference May 2023, CC BY 4.0",
+  "source_url": "https://sites.research.google/gr/open-buildings/",
+  "tiles": [
+   "17d",
+   "17f"
+  ]
+ }
+}

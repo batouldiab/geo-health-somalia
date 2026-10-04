@@ -1,0 +1,588 @@
+<title>Geo-Health Somalia Data and Architecture</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: two wide figures that scroll sideways on narrow screens; a short header, a legend, captions and reading notes. */
+:root {
+  --bg: #f6f7f4; --fg: #1d2a2e; --muted: #5d6b70; --panel: #ffffff; --line: #b9c3c6;
+  --accent: #0e6f8f; --accent-soft: #dcecf2;
+  --proposed: #b8650a; --proposed-soft: #fbead3;
+  --platform: #5b4a9c; --platform-soft: #ebe7f6;
+  --evidence-soft: #f2f0e6; --note-soft: #f1f3f2;
+  --guard: #eef2d9; --guard-fg: #3f4f1b; --grid-soft: #e4eef1;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-head: "IBM Plex Sans Condensed", "Arial Narrow", "Source Sans 3", sans-serif;
+  --font-mono: "IBM Plex Mono", "Consolas", monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121a1d; --fg: #e6ecee; --muted: #9fb0b6; --panel: #1b262a; --line: #3c4b50;
+  --accent: #58b6d6; --accent-soft: #15333d; --proposed: #e9a24a; --proposed-soft: #3a2a12;
+  --platform: #b3a3e6; --platform-soft: #2a2440; --evidence-soft: #2a2a22; --note-soft: #202a2d;
+  --guard: #26301a; --guard-fg: #d6e2b0; --grid-soft: #15272e; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121a1d; --fg: #e6ecee; --muted: #9fb0b6; --panel: #1b262a; --line: #3c4b50;
+  --accent: #58b6d6; --accent-soft: #15333d; --proposed: #e9a24a; --proposed-soft: #3a2a12;
+  --platform: #b3a3e6; --platform-soft: #2a2440; --evidence-soft: #2a2a22; --note-soft: #202a2d;
+  --guard: #26301a; --guard-fg: #d6e2b0; --grid-soft: #15272e; color-scheme: dark }
+
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.45; }
+.wrap { max-width: 1840px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 40px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 24px; margin-bottom: 10px; }
+h1 { font-family: var(--font-head); font-weight: 600; font-size: 1.7rem; margin: 0; letter-spacing: 0.01em; text-wrap: balance; }
+h2 { font-family: var(--font-head); font-weight: 600; font-size: 1.25rem; margin: 28px 0 8px; }
+.sub { color: var(--muted); margin: 0; max-width: 78ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 8px 0 12px; font-size: 0.9rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 22px; height: 12px; border-radius: 3px; border: 1.5px solid var(--line); background: var(--panel); }
+.sw.built { border-color: var(--accent); }
+.sw.platform { background: var(--platform-soft); border-color: var(--platform); }
+.sw.evidence { background: var(--evidence-soft); }
+.sw.prop { background: var(--proposed-soft); border-color: var(--proposed); border-style: dashed; }
+.sw.guard { background: var(--guard); border-color: var(--guard-fg); }
+figure { margin: 0; }
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); padding: 10px; }
+.scroll svg { display: block; width: 100%; min-width: 1400px; height: auto; color: var(--fg); font-family: var(--font-body); }
+figcaption { color: var(--muted); font-size: 0.95rem; margin-top: 10px; max-width: 110ch; }
+.notes { margin-top: 18px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px 24px; }
+.notes div { min-width: 0; }
+.notes h3 { font-family: var(--font-head); font-size: 1.05rem; font-weight: 600; margin: 0 0 4px; }
+.notes p { margin: 0; font-size: 0.95rem; }
+code { font-family: var(--font-mono); font-size: 0.85em; }
+
+.box rect { fill: var(--panel); stroke: var(--line); stroke-width: 1.2; }
+.box.built rect { stroke: var(--accent); }
+.box.platform rect { fill: var(--platform-soft); stroke: var(--platform); }
+.box.evidence rect { fill: var(--evidence-soft); }
+.box.note rect { fill: var(--note-soft); stroke-dasharray: 2 3; }
+.box.proposed rect { fill: var(--proposed-soft); stroke: var(--proposed); stroke-dasharray: 5 4; }
+.box.grid rect { fill: var(--grid-soft); stroke: var(--accent); stroke-width: 1.8; }
+.box.guard rect { fill: var(--guard); stroke: var(--guard-fg); }
+.box text.t { font-weight: 700; font-size: 13.5px; fill: currentColor; }
+.box text.b { font-size: 12px; fill: currentColor; }
+.box.guard text { fill: var(--guard-fg); }
+.box text.tag { font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; fill: var(--muted); }
+.box.proposed text.tag { fill: var(--proposed); }
+.box.platform text.tag { fill: var(--platform); }
+text.b { font-size: 12px; fill: currentColor; }
+text.bprop { font-size: 12px; fill: var(--proposed); }
+text.bplat { font-size: 12px; fill: var(--platform); }
+text.h { font-family: var(--font-head); font-size: 17px; font-weight: 600; fill: currentColor; }
+text.h.prop { fill: var(--proposed); }
+text.lvl { font-family: var(--font-head); font-size: 14px; font-weight: 600; fill: currentColor; }
+text.lvls { font-size: 11px; fill: var(--muted); }
+line.hl { stroke: var(--line); stroke-width: 1.5; }
+.arrow { fill: none; stroke: var(--accent); stroke-width: 1.8; }
+.arrow.up { stroke: var(--accent); }
+.arrow.down { stroke: var(--platform); }
+.arrow.prop { stroke: var(--proposed); }
+.arrow.muted { stroke: var(--muted); stroke-width: 1.4; }
+.mk-flow, .mk-up { fill: var(--accent); } .mk-down { fill: var(--platform); } .mk-prop { fill: var(--proposed); } .mk-muted { fill: var(--muted); }
+text.al { font-size: 11.5px; font-weight: 600; fill: var(--muted); }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+<div class="wrap">
+<header>
+  <h1>Geo-Health Somalia — data integration and architecture</h1>
+  <p class="sub">How the NexaSEE and Somalia datasets complete each other on one 10 × 10 km grid, and the system that turns them into answers on a phone with no signal. Solid blue is built; violet is on the NexaSEE platform; dashed amber is proposed.</p>
+</header>
+<div class="legend">
+  <span><i class="sw built"></i> built, in this submission</span>
+  <span><i class="sw platform"></i> on the NexaSEE platform (geo-philanthropy.nexasee.com)</span>
+  <span><i class="sw evidence"></i> evidence that shows the problem</span>
+  <span><i class="sw prop"></i> proposed, with the open data it would use</span>
+  <span><i class="sw guard"></i> guardrails</span>
+</div>
+
+<h2>Figure 1 · How the datasets complete each other</h2>
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 1780 864" role="img" aria-label="Datasets at national, regional, square, pixel and point level feed one 10 by 10 km grid; rasters and records are aggregated up into it, national and regional figures are spread down into it, and the fused rows yield the need index, the outreach shortlist, facility checks, the finder answers and the proposed age-and-sex and question layers." xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="ah-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-flow"/></marker>
+<marker id="ah-up" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-up"/></marker>
+<marker id="ah-down" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-down"/></marker>
+<marker id="ah-prop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-prop"/></marker>
+<marker id="ah-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-muted"/></marker>
+</defs>
+<text class="h" x="140" y="40">People</text><line class="hl" x1="140" y1="50" x2="385" y2="50"/>
+<text class="h" x="399" y="40">Place and environment</text><line class="hl" x1="399" y1="50" x2="644" y2="50"/>
+<text class="h" x="658" y="40">Access</text><line class="hl" x1="658" y1="50" x2="903" y2="50"/>
+<text class="h" x="917" y="40">Care</text><line class="hl" x1="917" y1="50" x2="1162" y2="50"/>
+<text class="h" x="1176" y="40">Voices</text><line class="hl" x1="1176" y1="50" x2="1421" y2="50"/>
+<text class="h" x="1450" y="40">What the fusion yields, per square</text><line class="hl" x1="1450" y1="50" x2="1760" y2="50"/>
+<text class="lvl" x="20" y="80">National</text><text class="lvls" x="20" y="94">one value per year</text>
+<text class="lvl" x="20" y="231.5">Region, district</text><text class="lvls" x="20" y="245.5">17 regions · 5 districts</text>
+<text class="lvl" x="20" y="388.0">Square, 10 km</text><text class="lvls" x="20" y="402.0">272 in Bakool</text><text class="lvls" x="20" y="416.0">cell 0.09°</text>
+<g class="box grid"><rect x="140" y="374.0" width="1281" height="128" rx="8"/><text class="t" x="150" y="395.0">NexaSEE 10 × 10 km grid · one row per square, every field with its source and date</text></g>
+<text class="b" x="150" y="418.0">· people 2020 (sum of pixels)</text>
+<text class="b" x="150" y="444.0">· built-up vs pastoral squares</text>
+<text class="bprop" x="150" y="470.0">· girls 10–14, under-5, 60+ · proposed</text>
+<text class="b" x="409" y="418.0">· land-cover shares (11 classes)</text>
+<text class="b" x="409" y="444.0">· buildings, settlement clusters</text>
+<text class="bplat" x="409" y="470.0">· night light · platform</text>
+<text class="b" x="668" y="418.0">· walk and drive minutes (pop-weighted)</text>
+<text class="b" x="668" y="444.0">· share beyond 60 and 120 min</text>
+<text class="bplat" x="668" y="470.0">· road km by class · platform</text>
+<text class="b" x="927" y="418.0">· nearest listed facility, level, date</text>
+<text class="b" x="927" y="444.0">· plausibility flag (buildings in 500 m)</text>
+<text class="b" x="927" y="470.0">· per-village answer for the finder</text>
+<text class="bprop" x="1186" y="418.0">· question density, urgency · proposed</text>
+<text class="bprop" x="1186" y="444.0">· people reached per answer · proposed</text>
+<text class="lvl" x="20" y="578.0">Pixels</text><text class="lvls" x="20" y="592.0">10 m to 1 km rasters</text>
+<text class="lvl" x="20" y="732.5">Points, records</text><text class="lvls" x="20" y="746.5">named things</text>
+<path class="arrow down" d="M202.5,328.0 L202.5,372.0" marker-end="url(#ah-down)"/>
+<text class="al" x="208.5" y="355.0" text-anchor="start">poverty weight, population brackets</text>
+<path class="arrow down" d="M461.5,298.0 L461.5,372.0" marker-end="url(#ah-down)"/>
+<text class="al" x="467.5" y="340.0" text-anchor="start">district tag</text>
+<path class="arrow down" d="M720.5,313.0 L720.5,372.0" marker-end="url(#ah-down)"/>
+<text class="al" x="726.5" y="347.5" text-anchor="start">access note</text>
+<path class="arrow down" d="M979.5,313.0 L979.5,372.0" marker-end="url(#ah-down)"/>
+<text class="al" x="985.5" y="347.5" text-anchor="start">hospital note</text>
+<path class="arrow down" d="M1238.5,313.0 L1238.5,372.0" marker-end="url(#ah-down)"/>
+<text class="al" x="1244.5" y="347.5" text-anchor="start">aggregated counts</text>
+<path class="arrow down" d="M322.5,176.5 L322.5,215.5" marker-end="url(#ah-down)"/>
+<text class="al" x="316.5" y="201.0" text-anchor="end">context series</text>
+<path class="arrow down" d="M581.5,191.5 L581.5,215.5" marker-end="url(#ah-down)" stroke-dasharray="6 5"/>
+<text class="al" x="575.5" y="208.5" text-anchor="end">rates for population bands</text>
+<path class="arrow down" d="M840.5,176.5 L840.5,215.5" marker-end="url(#ah-down)"/>
+<text class="al" x="834.5" y="201.0" text-anchor="end">survey evidence</text>
+<path class="arrow down" d="M1099.5,161.5 L1099.5,215.5" marker-end="url(#ah-down)"/>
+<text class="al" x="1093.5" y="193.5" text-anchor="end">workforce density</text>
+<path class="arrow down" d="M1358.5,161.5 L1358.5,215.5" marker-end="url(#ah-down)"/>
+<text class="al" x="1352.5" y="193.5" text-anchor="end">mood vs data flags</text>
+<path class="arrow up" d="M200,564.0 L200,504.0" marker-end="url(#ah-up)"/>
+<text class="al" x="206" y="526.0" text-anchor="start">sum per square</text>
+<path class="arrow up" d="M459,564.0 L459,504.0" marker-end="url(#ah-up)"/>
+<text class="al" x="465" y="526.0" text-anchor="start">class shares; lit share</text>
+<path class="arrow up" d="M718,564.0 L718,504.0" marker-end="url(#ah-up)"/>
+<text class="al" x="724" y="526.0" text-anchor="start">population-weighted mean</text>
+<path class="arrow up" d="M365,718.5 L365,504.0" marker-end="url(#ah-up)"/>
+<text class="al" x="359" y="546.0" text-anchor="end">names for squares, finder</text>
+<path class="arrow up" d="M624,718.5 L624,504.0" marker-end="url(#ah-up)"/>
+<text class="al" x="618" y="546.0" text-anchor="end">count, cluster, check</text>
+<path class="arrow up" d="M883,718.5 L883,504.0" marker-end="url(#ah-up)"/>
+<text class="al" x="877" y="546.0" text-anchor="end">km per class</text>
+<path class="arrow up" d="M1142,718.5 L1142,504.0" marker-end="url(#ah-up)"/>
+<text class="al" x="1136" y="546.0" text-anchor="end">nearest, level, date</text>
+<path class="arrow up" d="M1401,718.5 L1401,504.0" marker-end="url(#ah-up)" stroke-dasharray="6 5"/>
+<text class="al" x="1395" y="546.0" text-anchor="end">where asked, how urgent</text>
+<path class="arrow muted" d="M429,718.5 L429,661.5" marker-end="url(#ah-muted)"/>
+<text class="al" x="435" y="693.0" text-anchor="start">confirms village vs rangeland</text>
+<path class="arrow muted" d="M688,718.5 L688,676.5" marker-end="url(#ah-muted)"/>
+<text class="al" x="694" y="700.5" text-anchor="start">adds paths, classes, closures</text>
+<path class="arrow muted" d="M947,718.5 L947,646.5" marker-end="url(#ah-muted)"/>
+<text class="al" x="953" y="685.5" text-anchor="start">checked against buildings</text>
+<path class="arrow flow" d="M1423,382.0 L1437,382.0 L1437,106.25 L1448,106.25" marker-end="url(#ah-flow)"/>
+<path class="arrow flow" d="M1423,382.0 L1437,382.0 L1437,198.75 L1448,198.75" marker-end="url(#ah-flow)"/>
+<path class="arrow flow" d="M1423,382.0 L1437,382.0 L1437,283.75 L1448,283.75" marker-end="url(#ah-flow)"/>
+<path class="arrow flow" d="M1423,382.0 L1437,382.0 L1437,368.75 L1448,368.75" marker-end="url(#ah-flow)"/>
+<path class="arrow prop" d="M1423,476.25 L1437,476.25 L1437,476.25 L1448,476.25" marker-end="url(#ah-prop)" stroke-dasharray="6 5"/>
+<path class="arrow prop" d="M1423,494.0 L1437,494.0 L1437,583.75 L1448,583.75" marker-end="url(#ah-prop)" stroke-dasharray="6 5"/>
+<g class="box platform">
+<rect x="140" y="66" width="245" height="110" rx="6"/>
+<text class="t" x="150" y="86.5">Our World in Data</text>
+<text class="tag" x="375" y="170.5" text-anchor="end">on the NexaSEE platform</text>
+<text class="b" x="150" y="104">32 Somalia series 1950–2025:</text>
+<text class="b" x="150" y="118">population, fertility, median age,</text>
+<text class="b" x="150" y="134">life expectancy, child and maternal</text>
+<text class="b" x="150" y="148">mortality, physicians</text>
+</g>
+<g class="box proposed">
+<rect x="399" y="66" width="245" height="126" rx="6"/>
+<text class="t" x="409" y="86.5">UN SDG Global Database</text>
+<text class="tag" x="634" y="185.5" text-anchor="end">proposed</text>
+<text class="b" x="409" y="104">Somalia (area 706): 3.1.1 maternal</text>
+<text class="b" x="409" y="118">deaths, 3.2.1 under-5 deaths, 3.c.1</text>
+<text class="b" x="409" y="134">health workers, 1.2.2 poverty; sex,</text>
+<text class="b" x="409" y="148">age and location breakdowns where</text>
+<text class="b" x="409" y="164">published</text>
+</g>
+<g class="box evidence">
+<rect x="658" y="66" width="245" height="110" rx="6"/>
+<text class="t" x="668" y="86.5">SHDS 2020 (UNFPA / SNBS)</text>
+<text class="tag" x="893" y="170.5" text-anchor="end">shows the problem</text>
+<text class="b" x="668" y="104">62% of women name distance as a</text>
+<text class="b" x="668" y="118">barrier; 21% of births in a facility;</text>
+<text class="b" x="668" y="134">national and survey domains, not</text>
+<text class="b" x="668" y="148">districts</text>
+</g>
+<g class="box evidence">
+<rect x="917" y="66" width="245" height="96" rx="6"/>
+<text class="t" x="927" y="86.5">WHO Global Health Observatory</text>
+<text class="tag" x="1152" y="155.5" text-anchor="end">shows the problem</text>
+<text class="b" x="927" y="104">0.65 doctors and 3.16 nurses per</text>
+<text class="b" x="927" y="118">10,000 (2024); UHC service coverage</text>
+<text class="b" x="927" y="134">index 30 (2023)</text>
+</g>
+<g class="box platform">
+<rect x="1176" y="66" width="245" height="96" rx="6"/>
+<text class="t" x="1186" y="86.5">Public sentiment (iSEE)</text>
+<text class="tag" x="1411" y="155.5" text-anchor="end">on the NexaSEE platform</text>
+<text class="b" x="1186" y="104">AI reading of public web sources on</text>
+<text class="b" x="1186" y="118">the 32 indicators, labelled a reading,</text>
+<text class="b" x="1186" y="134">not a survey</text>
+</g>
+<g class="box built">
+<rect x="140" y="217.5" width="245" height="110" rx="6"/>
+<text class="t" x="150" y="238.0">MPI 2024 · district population</text>
+<text class="b" x="150" y="255">Bakool 97.4% poor, intensity 68.7%</text>
+<text class="b" x="150" y="270">(one value for the region); district</text>
+<text class="b" x="150" y="285">population 2021 with the PESS 2014</text>
+<text class="b" x="150" y="300">(367,226) and IPC 2024 (543,371)</text>
+<text class="b" x="150" y="315">brackets</text>
+</g>
+<g class="box built">
+<rect x="399" y="217.5" width="245" height="80" rx="6"/>
+<text class="t" x="409" y="238.0">OCHA COD-AB boundaries</text>
+<text class="b" x="409" y="255">region and five district polygons,</text>
+<text class="b" x="409" y="270">edition 2026-01-26; every square</text>
+<text class="b" x="409" y="285">tagged with its district</text>
+</g>
+<g class="box built">
+<rect x="658" y="217.5" width="245" height="96" rx="6"/>
+<text class="t" x="668" y="238.0">District access notes</text>
+<text class="b" x="668" y="255">road blockade history and 2025</text>
+<text class="b" x="668" y="270">reopening per district, each with its</text>
+<text class="b" x="668" y="285">public source (UN, OCHA, EUAA, Radio</text>
+<text class="b" x="668" y="300">Ergo)</text>
+</g>
+<g class="box evidence">
+<rect x="917" y="217.5" width="245" height="96" rx="6"/>
+<text class="t" x="927" y="238.0">Hospital gap</text>
+<text class="tag" x="1152" y="307.0" text-anchor="end">gap declared</text>
+<text class="b" x="927" y="255">Bakool Regional Hospital restored in</text>
+<text class="b" x="927" y="270">Xudur (WHO EMRO, Jan 2026) is on no</text>
+<text class="b" x="927" y="285">public list; the app says so</text>
+</g>
+<g class="box proposed">
+<rect x="1176" y="217.5" width="245" height="96" rx="6"/>
+<text class="t" x="1186" y="238.0">Questions per facility and district</text>
+<text class="tag" x="1411" y="307.0" text-anchor="end">proposed</text>
+<text class="b" x="1186" y="255">counts, themes and urgency of SMS</text>
+<text class="b" x="1186" y="270">questions, aggregated so no single</text>
+<text class="b" x="1186" y="285">case is visible</text>
+</g>
+<g class="box built">
+<rect x="140" y="564.0" width="201" height="110" rx="6"/>
+<text class="t" x="150" y="584.5">WorldPop 2020 · 100 m</text>
+<text class="b" x="150" y="602">people per pixel (CC BY 4.0);</text>
+<text class="b" x="150" y="616">age-and-sex rasters 2015–2030,</text>
+<text class="b" x="150" y="632">5-year bands by sex, e.g.</text>
+<text class="b" x="150" y="646">som_f_10_2025 for girls 10–14</text>
+<text class="b" x="150" y="662">· proposed</text>
+</g>
+<g class="box built">
+<rect x="399" y="564.0" width="201" height="96" rx="6"/>
+<text class="t" x="409" y="584.5">WorldCover 10 m · VIIRS ~500 m</text>
+<text class="b" x="409" y="602">land cover in 11 classes;</text>
+<text class="b" x="409" y="616">VIIRS night-light radiance</text>
+<text class="b" x="409" y="632">(~500 m, monthly and annual)</text>
+<text class="b" x="409" y="646">on the platform&#x27;s squares</text>
+</g>
+<g class="box built">
+<rect x="658" y="564.0" width="201" height="110" rx="6"/>
+<text class="t" x="668" y="584.5">Malaria Atlas 2020 · 1 km</text>
+<text class="b" x="668" y="602">minutes to the nearest</text>
+<text class="b" x="668" y="616">facility, walking and</text>
+<text class="b" x="668" y="632">motorized (Weiss et al. 2020);</text>
+<text class="b" x="668" y="646">global 2019 facility inputs,</text>
+<text class="b" x="668" y="662">no closures</text>
+</g>
+<g class="box note">
+<rect x="917" y="564.0" width="201" height="80" rx="6"/>
+<text class="t" x="927" y="584.5">No raster for care</text>
+<text class="b" x="927" y="602">facility data exists only as</text>
+<text class="b" x="927" y="616">points; travel time is the</text>
+<text class="b" x="927" y="632">raster that answers for it</text>
+</g>
+<g class="box note">
+<rect x="1176" y="564.0" width="201" height="80" rx="6"/>
+<text class="t" x="1186" y="584.5">No raster for voices</text>
+<text class="b" x="1186" y="602">questions arrive as records</text>
+<text class="b" x="1186" y="616">with a facility or a square,</text>
+<text class="b" x="1186" y="632">never as a surface</text>
+</g>
+<g class="box built">
+<rect x="140" y="718.5" width="245" height="80" rx="6"/>
+<text class="t" x="150" y="739.0">OpenStreetMap places</text>
+<text class="b" x="150" y="756">444 named places inside Bakool, 577</text>
+<text class="b" x="150" y="771">outside kept only to be refused (ODbL,</text>
+<text class="b" x="150" y="786">via Overpass)</text>
+</g>
+<g class="box built">
+<rect x="399" y="718.5" width="245" height="80" rx="6"/>
+<text class="t" x="409" y="739.0">Google Open Buildings V3</text>
+<text class="b" x="409" y="756">55,985 detected buildings at</text>
+<text class="b" x="409" y="771">confidence ≥ 0.7 in Bakool&#x27;s squares;</text>
+<text class="b" x="409" y="786">279 clusters of 20+; misses tents</text>
+</g>
+<g class="box platform">
+<rect x="658" y="718.5" width="245" height="96" rx="6"/>
+<text class="t" x="668" y="739.0">HDX-OSM roads and paths by class</text>
+<text class="tag" x="893" y="808.0" text-anchor="end">on the NexaSEE platform</text>
+<text class="b" x="668" y="756">trunk, primary, secondary, tertiary,</text>
+<text class="b" x="668" y="771">track, path: metres per class per</text>
+<text class="b" x="668" y="786">square (2024 and 2026 extracts)</text>
+</g>
+<g class="box built">
+<rect x="917" y="718.5" width="245" height="96" rx="6"/>
+<text class="t" x="927" y="739.0">Facility lists</text>
+<text class="b" x="927" y="756">Maina et al. 2019 (68 Bakool records),</text>
+<text class="b" x="927" y="771">WHO/MoH 2021 (4 geocoded), OSM (1); no</text>
+<text class="b" x="927" y="786">status, services or phones. Ministry</text>
+<text class="b" x="927" y="801">Master Facility List 2026 when public</text>
+</g>
+<g class="box proposed">
+<rect x="1176" y="718.5" width="245" height="126" rx="6"/>
+<text class="t" x="1186" y="739.0">SMS and voice questions · worker registry</text>
+<text class="tag" x="1411" y="838.0" text-anchor="end">proposed</text>
+<text class="b" x="1186" y="756">clinics and community members ask by</text>
+<text class="b" x="1186" y="771">text or voice; each registered sender</text>
+<text class="b" x="1186" y="786">gives a facility and a position, which</text>
+<text class="b" x="1186" y="801">is how doctors and nurses get a</text>
+<text class="b" x="1186" y="816">lat/lon</text>
+</g>
+<g class="box built">
+<rect x="1450" y="66" width="310" height="80" rx="6"/>
+<text class="t" x="1460" y="86.5">People far from care</text>
+<text class="b" x="1460" y="104">U = people × poverty × min(1, walk / 120 min);</text>
+<text class="b" x="1460" y="118">48% of Bakool more than an hour from any listed</text>
+<text class="b" x="1460" y="134">facility (our estimate)</text>
+</g>
+<g class="box built">
+<rect x="1450" y="158.5" width="310" height="80" rx="6"/>
+<text class="t" x="1460" y="179.0">Villages with no care nearby</text>
+<text class="b" x="1460" y="196">99 settlement clusters with no listed facility</text>
+<text class="b" x="1460" y="211">within 5 km in squares averaging over an hour on</text>
+<text class="b" x="1460" y="226">foot: the outreach shortlist</text>
+</g>
+<g class="box built">
+<rect x="1450" y="251.0" width="310" height="66" rx="6"/>
+<text class="t" x="1460" y="271.5">Facility plausibility</text>
+<text class="b" x="1460" y="288">7 of 73 listed facilities with no building within</text>
+<text class="b" x="1460" y="304">500 m: listed is not the same as open</text>
+</g>
+<g class="box built">
+<rect x="1450" y="328.5" width="310" height="80" rx="6"/>
+<text class="t" x="1460" y="349.0">The finder&#x27;s answers</text>
+<text class="b" x="1460" y="366">nearest listed facility, higher-level facility,</text>
+<text class="b" x="1460" y="381">modelled walk, list date and access note, per</text>
+<text class="b" x="1460" y="396">village, offline</text>
+</g>
+<g class="box proposed">
+<rect x="1450" y="421.0" width="310" height="110" rx="6"/>
+<text class="t" x="1460" y="441.5">Who is far from care, by age and sex</text>
+<text class="tag" x="1750" y="525.5" text-anchor="end">proposed</text>
+<text class="b" x="1460" y="458">girls 10–14, children under 5, people 60+ per</text>
+<text class="b" x="1460" y="474">square from WorldPop age-sex bands; national SDG</text>
+<text class="b" x="1460" y="488">rates spread over those bands, labelled model</text>
+<text class="b" x="1460" y="504">estimates</text>
+</g>
+<g class="box proposed">
+<rect x="1450" y="543.5" width="310" height="80" rx="6"/>
+<text class="t" x="1460" y="564.0">Need signal from questions</text>
+<text class="tag" x="1750" y="618.0" text-anchor="end">proposed</text>
+<text class="b" x="1460" y="581">what facilities and communities ask, where and</text>
+<text class="b" x="1460" y="596">how urgent; feeds the index as a live term</text>
+</g>
+</svg>
+</div>
+<figcaption>Read it from the middle: every dataset ends up as fields on the same 10 × 10 km squares. Pixels and records are aggregated upward into the band (sums, population-weighted means, class shares, counts, nearest-by-distance); national and regional figures come downward as weights, brackets and notes. Each source fills a gap the others leave: WorldPop says how many people, Open Buildings and WorldCover say whether they live in a village or move with herds, the Malaria Atlas surface says how long the walk is, the OSM roads say on what kind of road or path, the facility lists say where care is listed, the buildings check whether a listed facility is plausible, the MPI says how poor, and the national series give the rates that the proposed age-and-sex bands would spread over the squares. Every fused value carries its source and date; anything spread down from a national rate is labelled a model estimate.</figcaption>
+</figure>
+
+<h2>Figure 2 · The architecture that is built, and the SMS loop that is proposed</h2>
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 1840 596" role="img" aria-label="Built architecture: a Python pipeline writes 250 KB of data files served by a static Nginx site to a Leaflet map and an offline finder running Whisper tiny in the browser, tested in CI, on the NexaSEE grid; beside it the proposed SMS loop from a clinic through a bridge service to volunteer doctors and back, with a de-identified store and a monthly sync into an offline library." xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="ah-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-flow"/></marker>
+<marker id="ah-up" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-up"/></marker>
+<marker id="ah-down" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-down"/></marker>
+<marker id="ah-prop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-prop"/></marker>
+<marker id="ah-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-muted"/></marker>
+</defs>
+<text class="h" x="20" y="36">Built · in the repository today</text><line class="hl" x1="20" y1="46" x2="1220" y2="46"/>
+<text class="h prop" x="1280" y="36">Proposed · the SMS loop and the library</text><line class="hl" x1="1280" y1="46" x2="1820" y2="46"/>
+<path class="arrow flow" d="M270,149.25 L338,149.25" marker-end="url(#ah-flow)"/>
+<text class="al" x="305.0" y="143.25" text-anchor="middle">writes</text>
+<path class="arrow flow" d="M560,126.75 L628,126.75" marker-end="url(#ah-flow)"/>
+<text class="al" x="595.0" y="120.75" text-anchor="middle">serves</text>
+<path class="arrow flow" d="M880,111.75 L948,111.75" marker-end="url(#ah-flow)"/>
+<path class="arrow flow" d="M755.0,159.5 L755.0,262.5" marker-end="url(#ah-flow)"/>
+<text class="al" x="761.0" y="216.0" text-anchor="start">same origin, same files</text>
+<path class="arrow flow" d="M1085.0,174.5 L1085.0,262.5" marker-end="url(#ah-flow)"/>
+<text class="al" x="1091.0" y="223.5" text-anchor="start">?q=&lt;village&gt;</text>
+<path class="arrow flow" d="M630,349.75 L562,349.75" marker-end="url(#ah-flow)"/>
+<text class="al" x="595.0" y="343.75" text-anchor="middle">offline</text>
+<path class="arrow muted" d="M145.0,264.5 L145.0,236.5" marker-end="url(#ah-muted)"/>
+<text class="al" x="151.0" y="253.5" text-anchor="start">grid ids, people per square</text>
+<path class="arrow prop" d="M1530,119.25 L1568,119.25" marker-end="url(#ah-prop)" stroke-dasharray="6 5"/>
+<path class="arrow prop" d="M1695.0,174.5 L1695.0,202.5" marker-end="url(#ah-prop)" stroke-dasharray="6 5"/>
+<path class="arrow prop" d="M1570,244.75 L1532,252.25" marker-end="url(#ah-prop)" stroke-dasharray="6 5"/>
+<path class="arrow prop" d="M1405.0,300.0 L1405.0,328.0" marker-end="url(#ah-prop)" stroke-dasharray="6 5"/>
+<path class="arrow prop" d="M1530,370.25 L1568,370.25" marker-end="url(#ah-prop)" stroke-dasharray="6 5"/>
+<path class="arrow prop" d="M1280,370.25 L1250,370.25 L1250,119.25 L1222,119.25" marker-end="url(#ah-prop)" stroke-dasharray="6 5"/>
+<path class="arrow prop" d="M1695.0,425.5 L1695.0,439.5 L1238,439.5 L1238,389.75 L1222,389.75" marker-end="url(#ah-prop)" stroke-dasharray="6 5"/>
+<text class="al" transform="rotate(-90 1262 244.75)" x="1262" y="244.75" text-anchor="middle">need signal → map</text>
+<text class="al" x="1466.5" y="455.5" text-anchor="middle">the reviewed library joins the finder&#39;s offline files</text>
+<g class="box built">
+<rect x="20" y="64" width="250" height="170" rx="6"/>
+<text class="t" x="30" y="84.5">Pipeline · Python</text>
+<text class="b" x="30" y="102">geopandas, rasterio, shapely</text>
+<text class="b" x="30" y="116">fetch_sources.py → raw/ + checksum</text>
+<text class="b" x="30" y="132">manifest</text>
+<text class="b" x="30" y="146">fetch_open_buildings.py (S2 tiles 17d,</text>
+<text class="b" x="30" y="162">17f)</text>
+<text class="b" x="30" y="176">build_bakool_health_v1.py ·</text>
+<text class="b" x="30" y="192">build_buildings_v1.py ·</text>
+<text class="b" x="30" y="206">postprocess_v1.py</text>
+<text class="b" x="30" y="222">fetch_models.py → Whisper tiny ONNX</text>
+</g>
+<g class="box built">
+<rect x="340" y="64" width="220" height="126" rx="6"/>
+<text class="t" x="350" y="84.5">Data files · 250 KB</text>
+<text class="b" x="350" y="102">access10 · facilities ·</text>
+<text class="b" x="350" y="116">adm2_bakool · places_bakool ·</text>
+<text class="b" x="350" y="132">buildings10 · settlements ·</text>
+<text class="b" x="350" y="146">facility_checks · mpi_regions</text>
+<text class="b" x="350" y="162">(json.gz, versioned, immutable</text>
+<text class="b" x="350" y="176">cache)</text>
+</g>
+<g class="box built">
+<rect x="630" y="64" width="250" height="96" rx="6"/>
+<text class="t" x="640" y="84.5">Static site · Nginx container</text>
+<text class="b" x="640" y="102">Vite 5 + TypeScript build; CSP script-</text>
+<text class="b" x="640" y="116">src &#x27;self&#x27; &#x27;wasm-unsafe-eval&#x27;;</text>
+<text class="b" x="640" y="132">Permissions-Policy microphone=(self);</text>
+<text class="b" x="640" y="146">no API, no database, no keys</text>
+</g>
+<g class="box built">
+<rect x="950" y="64" width="270" height="110" rx="6"/>
+<text class="t" x="960" y="84.5">Map · index.html (planner)</text>
+<text class="b" x="960" y="102">Leaflet 1.9 · Bakool card in English /</text>
+<text class="b" x="960" y="116">Somali · squares coloured by people far</text>
+<text class="b" x="960" y="132">from care, walk time, buildings, villages</text>
+<text class="b" x="960" y="146">with no care · a tap opens the finder with</text>
+<text class="b" x="960" y="162">the question filled</text>
+</g>
+<g class="box built">
+<rect x="630" y="264.5" width="590" height="170" rx="6"/>
+<text class="t" x="640" y="285.0">Finder · finder.html (health worker, offline)</text>
+<text class="b" x="640" y="302">service worker, two caches: finder-vN (page, bundles, 4 data files) and models-v1 (/models,</text>
+<text class="b" x="640" y="317">/ort)</text>
+<text class="b" x="640" y="332">speech.ts: @huggingface/transformers 4.3 + onnxruntime-web (WASM, 1 thread) running Whisper tiny</text>
+<text class="b" x="640" y="347">8-bit ONNX, 41 MB, language fixed Somali / English, audio never leaves the phone</text>
+<text class="b" x="640" y="362">match.ts: Somali spelling key + Dice bigram similarity, thresholds 0.92 / 0.60, closed lists:</text>
+<text class="b" x="640" y="377">444 places, 72 facilities, 5 districts</text>
+<text class="b" x="640" y="392">answer.ts: 12 answer sentences + 4 fail-safes filled from the data files · referral.ts: slot</text>
+<text class="b" x="640" y="407">filling 3 who × 5 why × urgent → GSM-7 code ≤ 160 chars → the phone&#x27;s own SMS app</text>
+<text class="b" x="640" y="422">localStorage slips (30 days, no names) · IndexedDB kept recordings → CC0 export</text>
+</g>
+<g class="box built">
+<rect x="340" y="264.5" width="220" height="126" rx="6"/>
+<text class="t" x="350" y="285.0">Phone · Android Chrome</text>
+<text class="b" x="350" y="302">installable, no store, no</text>
+<text class="b" x="350" y="317">account; aeroplane mode on; voice</text>
+<text class="b" x="350" y="332">pack 72 MB once on Wi-Fi, then</text>
+<text class="b" x="350" y="347">zero bytes a day; the slip goes</text>
+<text class="b" x="350" y="362">out as an ordinary SMS when a bar</text>
+<text class="b" x="350" y="377">appears</text>
+</g>
+<g class="box platform">
+<rect x="20" y="264.5" width="250" height="200" rx="6"/>
+<text class="t" x="30" y="285.0">Underneath · NexaSEE geo-somalia</text>
+<text class="tag" x="260" y="459.0" text-anchor="end">platform, not in this submission</text>
+<text class="b" x="30" y="302">open-source map platform: the national</text>
+<text class="b" x="30" y="317">10 × 10 km grid (som_grid_v1:</text>
+<text class="b" x="30" y="332">population 2015–2030, VIIRS night</text>
+<text class="b" x="30" y="347">light); on geo-</text>
+<text class="b" x="30" y="362">philanthropy.nexasee.com also roads by</text>
+<text class="b" x="30" y="377">class, MPI dots, Our World in Data</text>
+<text class="b" x="30" y="392">series, iSEE Analytics and Sentiment</text>
+<text class="b" x="30" y="407">through one LLM provider layer (Gemini</text>
+<text class="b" x="30" y="422">2.5 Flash, Claude, OpenRouter, Groq),</text>
+<text class="b" x="30" y="437">figures computed server-side</text>
+</g>
+<g class="box built">
+<rect x="20" y="495.0" width="540" height="80" rx="6"/>
+<text class="t" x="30" y="515.5">CI · GitHub Actions</text>
+<text class="b" x="30" y="532">npm ci → typecheck → build → node scripts/test-matcher.mjs (5,593 questions; the job</text>
+<text class="b" x="30" y="548">fails on any typed question answered directly with the wrong place) · deploy over SSH to</text>
+<text class="b" x="30" y="562">the droplet</text>
+</g>
+<g class="box guard">
+<rect x="630" y="495.0" width="590" height="80" rx="6"/>
+<text class="t" x="640" y="515.5">Guardrails</text>
+<text class="b" x="640" y="532">a person makes the call · yes/no on every heard name with its score · &quot;not sure, ask a person&quot; ·</text>
+<text class="b" x="640" y="548">places outside Bakool refused by name · medicines and doses refused · list date on every answer,</text>
+<text class="b" x="640" y="562">&quot;not confirmed open&quot; · nothing sent by the tool · no name or number on the slip</text>
+</g>
+<g class="box proposed">
+<rect x="1280" y="64" width="250" height="110" rx="6"/>
+<text class="t" x="1290" y="84.5">1 · Clinic or community member</text>
+<text class="b" x="1290" y="102">sends a question by SMS to one Somali</text>
+<text class="b" x="1290" y="116">short code (free: sponsored by a donor</text>
+<text class="b" x="1290" y="132">or NGO); a voice message is</text>
+<text class="b" x="1290" y="146">transcribed first (Meta MMS ASR,</text>
+<text class="b" x="1290" y="162">1,100+ languages, or Whisper)</text>
+</g>
+<g class="box proposed">
+<rect x="1570" y="64" width="250" height="110" rx="6"/>
+<text class="t" x="1580" y="84.5">2 · Bridge service</text>
+<text class="b" x="1580" y="102">queue; urgency and intent on a fixed</text>
+<text class="b" x="1580" y="116">list; Somali→English draft (NLLB-200);</text>
+<text class="b" x="1580" y="132">names and phone numbers blocked;</text>
+<text class="b" x="1580" y="146">routed by specialty; sender facility</text>
+<text class="b" x="1580" y="162">and time logged</text>
+</g>
+<g class="box proposed">
+<rect x="1570" y="204.5" width="250" height="80" rx="6"/>
+<text class="t" x="1580" y="225.0">3 · Volunteer doctors (MSF members)</text>
+<text class="b" x="1580" y="242">read and answer in a web inbox from</text>
+<text class="b" x="1580" y="257">anywhere; identity and time logged; a</text>
+<text class="b" x="1580" y="272">doctor answers, never the model</text>
+</g>
+<g class="box proposed">
+<rect x="1280" y="204.5" width="250" height="96" rx="6"/>
+<text class="t" x="1290" y="225.0">4 · Reply by SMS</text>
+<text class="b" x="1290" y="242">back to the asking number, in Somali;</text>
+<text class="b" x="1290" y="257">the clinic&#x27;s phone keeps the thread; a</text>
+<text class="b" x="1290" y="272">nurse or doctor in Bakool or in</text>
+<text class="b" x="1290" y="287">Mogadishu can be looped in</text>
+</g>
+<g class="box proposed">
+<rect x="1280" y="330.0" width="250" height="80" rx="6"/>
+<text class="t" x="1290" y="350.5">5 · De-identified Q&amp;A store</text>
+<text class="b" x="1290" y="368">question, answer, facility, specialty,</text>
+<text class="b" x="1290" y="382">date; no names; aggregated counts go</text>
+<text class="b" x="1290" y="398">to the map as the need signal</text>
+</g>
+<g class="box proposed">
+<rect x="1570" y="315.0" width="250" height="110" rx="6"/>
+<text class="t" x="1580" y="335.5">6 · Monthly sync, when online</text>
+<text class="b" x="1580" y="352">the platform&#x27;s LLM layer sorts</text>
+<text class="b" x="1580" y="368">answered questions into protocols and</text>
+<text class="b" x="1580" y="382">procedures, searchable, packed into</text>
+<text class="b" x="1580" y="398">the finder&#x27;s offline data; a doctor</text>
+<text class="b" x="1580" y="412">reviews before release</text>
+</g>
+<g class="box note">
+<rect x="1280" y="465.5" width="540" height="110" rx="6"/>
+<text class="t" x="1290" y="486.0">Limits to state on the slide</text>
+<text class="b" x="1290" y="503">SMS travels in clear over the operator&#x27;s network: confidentiality rests on no names or</text>
+<text class="b" x="1290" y="518">numbers in the text, pseudonymous codes, consent and encryption at rest, not on the</text>
+<text class="b" x="1290" y="533">channel; a private patient–doctor exchange needs a session channel (app or USSD), which</text>
+<text class="b" x="1290" y="548">is a later step. Volunteer identity, duty of care and local medical regulation need an</text>
+<text class="b" x="1290" y="563">agreement before the first message.</text>
+</g>
+</svg>
+</div>
+<figcaption>Left: the Python pipeline writes about 250 KB of versioned files; a static Nginx site serves them to a Leaflet map for the planner and to the finder, an installable page that keeps the files and the speech model in two service-worker caches and runs Whisper tiny in the browser, so a health worker asks in Somali with the radio off and the referral leaves as an ordinary SMS from her own messaging app. CI rebuilds and runs the matcher test on every push. Right: the proposed loop from a clinic's SMS through a bridge service to volunteer doctors and back, with a de-identified store, a need signal to the map, and a monthly sync that turns answered questions into an offline library.</figcaption>
+</figure>
+
+<div class="notes">
+  <div><h3>Reconciling population</h3><p>WorldPop 2020 gives about 441,000 people for Bakool's squares; UNFPA PESS 2014 counted 367,226 and the FSNAU/IPC projection for late 2024 is 543,371. The grid keeps WorldPop as the spatial pattern and shows the bracket beside every district total, so no square inherits a precision the sources do not have.</p></div>
+  <div><h3>Disaggregation, done honestly</h3><p>A national rate (maternal deaths per birth, under-5 deaths per child, health workers per 10,000) spread over the squares in proportion to the people in the relevant age-and-sex band gives an expected count per square, not a measurement. It is useful for ranking where a mobile team reaches the most girls or children, and it is labelled a model estimate wherever it appears. The age-and-sex bands come from WorldPop's constrained 2015–2030 rasters (CC BY 4.0).</p></div>
+  <div><h3>Where the doctors are</h3><p>No public dataset places individual doctors or nurses in Somalia. The proposed SMS line creates that registry as a by-product: a sender registers a facility and a position once, so every later question carries a lat/lon without anyone mapping staff by hand. It is operational data, logged with consent, never scraped.</p></div>
+  <div><h3>Access to light, roads and paths</h3><p>VIIRS radiance per square and the HDX-OSM road lengths by class (trunk to path) live on the NexaSEE platform. For the health question they add what the travel-time surface lacks: whether a populated square has any grid power or night activity, and whether the "road" to care is a trunk road or a footpath, which decides whether a vehicle referral is even possible.</p></div>
+</div>
+</div>

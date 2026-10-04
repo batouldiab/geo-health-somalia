@@ -1,0 +1,43 @@
+{
+ "national": {
+  "a": 54.3,
+  "h": 67.0,
+  "mpi": 0.363
+ },
+ "regions": {
+  "Awdal": {
+   "a": null,
+   "h": 46.2,
+   "mpi": 0.232
+  },
+  "Bakool": {
+   "a": 68.7,
+   "h": 97.4,
+   "mpi": 0.669
+  },
+  "Bay": {
+   "a": null,
+   "h": 88.8,
+   "mpi": 0.511
+  },
+  "Gedo": {
+   "a": null,
+   "h": 85.3,
+   "mpi": 0.489
+  },
+  "Hiiraan": {
+   "a": null,
+   "h": 90.1,
+   "mpi": 0.517
+  },
+  "Lower Shebelle": {
+   "a": null,
+   "h": 47.4,
+   "mpi": 0.23
+  },
+  "Middle Juba": null
+ },
+ "source": "https://ophi.org.uk/sites/default/files/2024-12/Somalia_MPI_report_2024.pdf",
+ "table": "Table 3.3, p.14",
+ "year": 2022
+}

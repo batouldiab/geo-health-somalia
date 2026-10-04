@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Geo Health Bakool: who lives far from a health facility in Bakool, Somalia, and where the nearest listed one is. Open data on a 10x10 km grid, in English and Somali, with an offline facility finder and referral slip for the health worker's phone.">
+<meta name="theme-color" content="#0b1220">
+<title>Bakool health access · Geo Health</title>
+<link rel="icon" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/icon-192.png">
+</head>
+<body>
+<div class="appwrap">
+  <header class="header">
+    <div class="header-brand">
+      <h1>Geo Health · Bakool</h1>
+      <div class="subtitle">Reaching health care in Somalia’s poorest surveyed region</div>
+    </div>
+    <nav class="doors" aria-label="The two parts of the tool">
+      <a class="door" href="/" aria-current="page">Map</a>
+      <a class="door" href="/finder.html" data-finder-link>Phone finder</a>
+    </nav>
+    <div class="by">by <a class="brand" href="https://nexasee.com" target="_blank" rel="noopener noreferrer" title="nexasee.com">Nexa<span class="see">SEE</span></a></div>
+  </header>
+  <div class="body">
+    <div id="map"></div>
+    <!-- the one card: content rendered by src/panels/bakool.ts -->
+    <div id="bakoolUi"><aside class="bk-card" id="bkCard" aria-labelledby="bkTitle"><p class="bk-lead">Loading the map data…</p></aside></div>
+  </div>
+</div>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

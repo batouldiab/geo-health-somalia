@@ -1,0 +1,133 @@
+/* Geo Health Bakool: the map page. One card over a dark satellite basemap; Leaflet's
+   bottom-left controls restyled for the dark theme. The finder has its own stylesheet
+   (src/finder/finder.css). Touch targets are 44 px or more, text 14 px or more. */
+
+/* ---- page ---- */
+html,body{height:100%;margin:0}
+body{background:#000;overflow:hidden;font-family:'Segoe UI',Tahoma,sans-serif}
+/* dvh tracks the browser's real visible viewport; plain vh can hang below it,
+   clipping the bottom-most controls (e.g. the attribution line) */
+.appwrap{display:flex;flex-direction:column;height:100vh;height:100dvh}
+.header{display:flex;align-items:center;gap:16px;background:#000;color:#fff;padding:8px 16px;min-height:56px;box-sizing:border-box}
+.header-brand{flex:1 1 auto;min-width:0}
+.header h1{margin:0;font-size:1.25rem;line-height:1.2}
+.header .subtitle{color:#94a3b8;font-size:0.85rem}
+/* the two doors of the tool: the map (this page) and the phone finder */
+.doors{display:inline-flex;border:1px solid #334155;border-radius:999px;overflow:hidden;background:#0f172a;flex:0 0 auto}
+.door{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;color:#cbd5e1;font-size:15px;font-weight:700;text-decoration:none}
+.door[aria-current="page"]{background:#14c8dc;color:#052e2f}
+.door:not([aria-current]):hover{background:#1e293b;color:#fff}
+.door:focus-visible{outline:2px solid #14c8dc;outline-offset:-3px}
+.header .by{flex:0 0 auto;font-size:0.8rem;font-weight:400;color:#94a3b8;letter-spacing:0.3px;white-space:nowrap}
+.header a.brand{font-family:'Segoe UI',sans-serif;font-weight:800;color:#e2e8f0;text-decoration:none}
+.header a.brand .see{color:#14c8dc}
+.header a.brand:hover{text-decoration:underline}
+.header a.brand:focus-visible{outline:2px solid #14c8dc;outline-offset:2px;border-radius:2px}
+@media screen and (max-width:767px){
+  .header{flex-wrap:wrap;gap:8px 12px;padding:8px 12px}
+  .header .by{display:none}
+  .header h1{font-size:1.1rem}
+  .header .subtitle{font-size:0.78rem}
+}
+.body{flex:1;position:relative;min-height:0}
+#map{position:absolute;inset:0;background:#000}
+.leaflet-container{background:#000}
+/* darken the borderless imagery basemap so it reads as a dark canvas */
+.basemap-dark{filter:brightness(0.25) saturate(0.35) contrast(1.15)}
+
+/* ---- Leaflet controls, bottom-left: zoom, then the scale bar, restyled for the dark theme ---- */
+.leaflet-bottom.leaflet-left{display:flex;flex-direction:row;align-items:flex-end;padding:0 0 49px 10px}
+.leaflet-bottom.leaflet-right{padding:0 10px 32px 0}
+.leaflet-bottom.leaflet-left .leaflet-control-zoom{order:-1}
+.leaflet-bottom.leaflet-left .leaflet-control-scale{order:1;margin:0 0 10px 10px}
+.leaflet-control-scale-line{border:2px solid #cbd5e1;border-top:none;background:rgba(15,23,42,0.8);color:#e2e8f0;font-size:12px;line-height:1.3;padding:2px 6px 1px;text-shadow:none}
+.leaflet-control-zoom.leaflet-bar{display:flex;flex-direction:column;gap:8px;background:transparent;border:none !important;box-shadow:none}
+.leaflet-control-zoom.leaflet-bar a{border:none !important;border-radius:8px !important;box-shadow:0 4px 6px rgba(0,0,0,0.3);width:44px;height:44px;line-height:44px;font-size:22px}
+@media screen and (max-width:767px){
+  .leaflet-tooltip{font-size:0.85em;padding:4px 8px}
+}
+@media (hover:none) and (pointer:coarse){.leaflet-marker-icon,.leaflet-interactive{cursor:pointer}}
+
+/* ---- the card: the plain-language face of the region, English or Somali ---- */
+#bakoolUi[hidden]{display:none}
+#bakoolUi{--bk-w:440px}
+.bk-card{position:absolute;top:14px;right:14px;max-height:calc(100% - 50px);z-index:700;box-sizing:border-box;width:min(var(--bk-w),calc(100vw - 28px));overflow-y:auto;background:rgba(15,23,42,0.96);border:1px solid #334155;border-radius:14px;box-shadow:0 16px 40px rgba(0,0,0,.5);padding:16px 18px;color:#e2e8f0;font-size:15px;line-height:1.5;scrollbar-width:thin;scrollbar-color:#334155 transparent}
+.bk-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px}
+.bk-title{margin:0;font-size:21px;line-height:1.2;font-weight:700}
+.bk-lang{display:inline-flex;flex:0 0 auto;border:1px solid #334155;border-radius:999px;overflow:hidden;background:rgba(15,23,42,0.6)}
+.bk-lang button{min-height:44px;padding:0 12px;border:0;background:transparent;color:#cbd5e1;font-size:14px;font-weight:700;cursor:pointer}
+.bk-lang button small{font-size:12px;font-weight:400;opacity:.85}
+.bk-lang button[aria-pressed="true"]{background:#14c8dc;color:#052e2f}
+.bk-lead{margin:0 0 4px;color:#e2e8f0;font-size:15px}
+.bk-caveat{margin:0 0 8px;color:#94a3b8;font-size:14px}
+.bk-legend{margin:8px 0 0;padding:10px 12px;border:1px solid #334155;border-radius:10px;background:rgba(255,255,255,.04)}
+.bk-lg{margin:0;font-size:14px;line-height:1.45;color:#cbd5e1}
+.bk-lg+.bk-lg{margin-top:6px}
+.bk-sec{margin:14px 0 0;padding-top:12px;border-top:1px solid #334155}
+.bk-sec--fac{margin-top:10px;padding:10px 12px;border:1px solid rgba(20,200,220,.4);border-radius:10px;background:rgba(20,200,220,.07)}
+.bk-sec--pick{margin-top:10px;padding:10px 12px;border:1px solid rgba(255,255,255,.35);border-radius:10px;background:rgba(255,255,255,.05)}
+.bk-p--hint{color:#94a3b8;font-size:14px;margin-top:4px}
+.bk-h3{margin:0 0 8px;font-size:14px;font-weight:700;color:#94a3b8}
+.bk-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.bk-big{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;min-height:48px;padding:8px 12px;border:2px solid #334155;border-radius:12px;background:#1e293b;color:#e2e8f0;font:inherit;text-align:left;cursor:pointer}
+.bk-big:hover{border-color:#475569}
+.bk-big[aria-pressed="true"]{border-color:#14c8dc;background:rgba(20,200,220,.12)}
+.bk-big:disabled{opacity:.45;cursor:not-allowed}
+.bk-big:focus-visible,.bk-pill:focus-visible,.bk-btn:focus-visible,.bk-lang button:focus-visible,.bk-link:focus-visible{outline:2px solid #14c8dc;outline-offset:2px}
+.bk-big-l{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-weight:700;font-size:15px;line-height:1.3}
+.bk-sw{display:inline-flex;gap:2px}
+.bk-chip{display:inline-block;box-sizing:border-box;width:14px;height:14px;border-radius:3px;border:1px solid rgba(255,255,255,.25);vertical-align:-2px}
+.bk-chip.round{border-radius:50%;border:2px solid #0f172a;box-shadow:0 0 0 1px rgba(255,255,255,.3)}
+.bk-chip.hollow{background:transparent;border:2px dashed #22d3ee;box-shadow:none}
+.bk-lg .bk-chip{margin-right:1px}
+.bk-dist{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.bk-pill{min-height:44px;padding:0 14px;border:2px solid #334155;border-radius:999px;background:#1e293b;color:#e2e8f0;font:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.bk-pill:hover{border-color:#475569}
+.bk-pill[aria-pressed="true"]{background:#14c8dc;border-color:#14c8dc;color:#052e2f}
+.bk-sum{display:flex;flex-direction:column;gap:6px}
+.bk-p{margin:0;font-size:14.5px;line-height:1.5}
+.bk-p--big{font-size:16px;font-weight:600}
+.bk-p--big .bk-chip{margin-right:6px}
+.bk-p--muted{color:#94a3b8;font-size:14px}
+.bk-p--flag{border-left:3px solid #f59e0b;background:rgba(245,158,11,.08);border-radius:0 6px 6px 0;padding:6px 10px;font-size:14px}
+.bk-p--flag a{color:#f59e0b}
+.bk-p a{color:#14c8dc}
+.bk-tag{display:inline-block;padding:1px 8px;border-radius:999px;background:#334155;color:#cbd5e1;font-size:12.5px;font-weight:600;vertical-align:1px}
+.bk-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.bk-btn{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;padding:0 16px;border-radius:10px;border:2px solid #334155;background:transparent;color:#e2e8f0;font:inherit;font-weight:700;font-size:14.5px;text-decoration:none;cursor:pointer}
+.bk-btn:hover{background:#1e293b}
+.bk-btn--primary{background:#14c8dc;border-color:#14c8dc;color:#052e2f}
+.bk-btn--primary:hover{background:#22d3ee;border-color:#22d3ee}
+.bk-btn--wide{width:100%;margin-bottom:8px}
+.bk-status{font-size:13.5px;color:#94a3b8;word-break:break-all}
+.bk-foot{margin:14px 0 0;padding-top:10px;border-top:1px solid #334155;font-size:13.5px;line-height:1.5;color:#94a3b8}
+.bk-foot p{margin:0 0 6px}
+.bk-link{border:0;background:transparent;color:#14c8dc;font:inherit;padding:0;cursor:pointer;min-height:44px}
+.bk-link:hover{text-decoration:underline}
+.leaflet-tooltip.bk-dlabel{background:transparent;border:0;box-shadow:none;color:#fff;font-size:14px;font-weight:700;letter-spacing:.04em;text-shadow:0 0 4px #000,0 0 8px #000;pointer-events:none}
+.leaflet-tooltip.bk-dlabel::before{display:none}
+@media screen and (max-width:900px){
+  .body{display:flex;flex-direction:column;overflow-y:auto}
+  #map{position:relative;inset:auto;height:52vh;flex:0 0 auto}
+  .bk-card{position:static;width:auto;max-height:none;border-radius:0;border-left:0;border-right:0}
+  .bk-big{min-height:56px}
+}
+@media screen and (max-width:767px){
+  .leaflet-bottom.leaflet-left,.leaflet-bottom.leaflet-right{padding-bottom:0}
+}
+/* the facility list and the sources, collapsed by default */
+.bk-details{margin-top:8px}
+.bk-details>summary{cursor:pointer;font-weight:700;font-size:14.5px;color:#e2e8f0;min-height:44px;display:flex;align-items:center;list-style-position:inside}
+.bk-details>summary:hover{color:#fff}
+.bk-details>summary:focus-visible{outline:2px solid #14c8dc;outline-offset:2px}
+.bk-list{list-style:none;margin:4px 0 0;padding:0;max-height:40vh;overflow-y:auto;scrollbar-width:thin}
+.bk-fac{display:grid;grid-template-columns:18px minmax(0,1fr);column-gap:8px;align-items:center;width:100%;min-height:44px;padding:5px 6px;border:0;border-radius:8px;background:transparent;color:#e2e8f0;font:inherit;text-align:left;cursor:pointer}
+.bk-fac:hover,.bk-fac[aria-pressed="true"]{background:#1e293b}
+.bk-fac:focus-visible{outline:2px solid #14c8dc;outline-offset:-2px}
+.bk-fac .bk-chip{grid-row:1/3}
+.bk-fac-n{font-size:14.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bk-fac-d{grid-column:2;font-size:13px;color:#94a3b8}
+.bk-src{margin:4px 0 6px;padding-left:18px;font-size:13.5px;line-height:1.5}
+.bk-src a{color:#14c8dc}
+@media screen and (max-width:900px){.bk-list{max-height:none}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto !important}}

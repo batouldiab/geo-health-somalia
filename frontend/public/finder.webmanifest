@@ -1,0 +1,17 @@
+{
+  "name": "Geo Health · Bakool facility finder",
+  "short_name": "Facility finder",
+  "description": "Where is the nearest listed health facility in Bakool? Somali and English, by voice or text, with a referral slip that fits one SMS. Works offline after the first visit.",
+  "start_url": "/finder.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
+  "lang": "so",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

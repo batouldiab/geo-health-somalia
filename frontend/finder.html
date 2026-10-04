@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Geo Health Bakool facility finder: where is the nearest listed health facility? Somali and English, by voice or text, with a referral slip that fits one SMS. Works offline after the first visit.">
+<meta name="theme-color" content="#0b1220">
+<title>Bakool facility finder · Geo Health</title>
+<link rel="icon" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="manifest" href="/finder.webmanifest">
+</head>
+<body class="finder">
+<main class="fd">
+  <header class="fd-head">
+    <div class="fd-brand">
+      <span class="fd-logo" aria-hidden="true">+</span>
+      <div>
+        <p class="fd-kicker">Geo Health</p>
+        <h1 id="fdTitle">Bakool facility finder</h1>
+        <p class="fd-tag" id="fdTag"></p>
+      </div>
+    </div>
+    <div class="fd-tools">
+      <div class="fd-lang" role="group" aria-label="Language / Luqadda">
+        <button type="button" data-lang="so" aria-pressed="true" lang="so">Soomaali <small lang="en">· draft</small></button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en">English</button>
+      </div>
+      <div class="fd-pills" role="status" aria-live="polite">
+        <span class="fd-pill" id="fdNet"></span>
+        <span class="fd-pill" id="fdVoice" hidden></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="fd-askwrap" aria-labelledby="fdTitle">
+    <button type="button" class="fd-btn fd-btn--speak" id="fdMic" aria-pressed="false">
+      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm6-4a6 6 0 0 1-5 5.92V20h3v2H8v-2h3v-3.08A6 6 0 0 1 6 11h2a4 4 0 0 0 8 0h2z"/></svg>
+      <span id="fdMicLabel">Speak</span>
+    </button>
+    <form class="fd-ask" id="fdForm" autocomplete="off">
+      <label class="sr-only" for="fdInput">Your question</label>
+      <input class="fd-input" id="fdInput" type="text" inputmode="text" enterkeyhint="search" placeholder="">
+      <button type="submit" class="fd-btn" id="fdAsk">Ask</button>
+    </form>
+    <div class="fd-chips fd-examples" id="fdExamples"></div>
+    <p class="fd-status" id="fdStatus" role="status" aria-live="polite" hidden></p>
+  </section>
+
+  <section class="fd-card" id="fdHeard" hidden>
+    <h2 class="fd-label" id="fdHeardL">I heard:</h2>
+    <p class="fd-heardtext" id="fdHeardText"></p>
+    <p class="fd-help fd-ms" id="fdHeardMs"></p>
+  </section>
+
+  <section class="fd-card fd-card--confirm" id="fdConfirm" hidden>
+    <h2 class="fd-q" id="fdConfirmQ"></h2>
+    <p class="fd-help" id="fdConfirmScore"></p>
+    <div class="fd-row fd-row--yesno">
+      <button type="button" class="fd-btn fd-btn--primary" id="fdYes">Yes</button>
+      <button type="button" class="fd-btn" id="fdNo">No</button>
+    </div>
+  </section>
+
+  <!-- the fail-safe: no place in Bakool matched well enough, or the place is outside Bakool -->
+  <section class="fd-card fd-card--unsure" id="fdUnsure" hidden>
+    <h2 class="fd-big" id="fdUnsureT"></h2>
+    <p class="fd-help" id="fdUnsureH"></p>
+    <div class="fd-chips" id="fdChips"></div>
+  </section>
+
+  <section class="fd-card fd-card--scope" id="fdScope" hidden>
+    <h2 class="fd-big" id="fdScopeT"></h2>
+  </section>
+
+  <section class="fd-card fd-card--answer" id="fdAnswer" hidden tabindex="-1">
+    <div class="fd-meta" id="fdMeta"></div>
+    <ul class="fd-lines" id="fdLines"></ul>
+    <div class="fd-flagsrc" id="fdFlagSrc" hidden></div>
+    <div class="fd-row">
+      <button type="button" class="fd-btn fd-btn--primary" id="fdSlipOpen">Make a referral slip</button>
+      <button type="button" class="fd-btn" id="fdPlay" hidden>Play</button>
+      <a class="fd-btn fd-btn--link" id="fdMapLink" target="_blank" rel="noopener">Open on the map</a>
+    </div>
+    <!-- after a confirmed voice question only: keep the recording of the worker's own voice for speech data -->
+    <div class="fd-donate" id="fdDonate" hidden>
+      <p class="fd-help" id="fdDonateAsk"></p>
+      <div class="fd-row">
+        <button type="button" class="fd-btn fd-btn--sm" id="fdDonateKeep"></button>
+        <button type="button" class="fd-btn fd-btn--sm" id="fdDonateSkip"></button>
+        <button type="button" class="fd-btn fd-btn--sm fd-btn--link" id="fdDonateEdit"></button>
+      </div>
+      <div id="fdDonateMore" hidden>
+        <p class="fd-help" id="fdDonateHelp"></p>
+        <div class="fd-slot"><div class="fd-slot-l" id="fdDonateLangL"></div><div class="fd-chips" id="fdDonateLang"></div></div>
+        <label class="fd-slot-l" for="fdDonateText" id="fdDonateTextL"></label>
+        <textarea class="fd-input fd-textarea" id="fdDonateText" rows="2"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- referral slip: who / why / to, by voice or taps; a 160-character code with no name, sent by the phone's own SMS app -->
+  <section class="fd-card fd-card--slip" id="fdSlip" hidden>
+    <h2 class="fd-h2" id="fdSlipTitle">Referral slip</h2>
+    <p class="fd-help" id="fdSlipHelp"></p>
+    <p class="fd-consent" id="fdSlipConsent"></p>
+    <button type="button" class="fd-btn fd-btn--wide" id="fdSlipMic" aria-pressed="false">Speak the slip</button>
+    <p class="fd-status" id="fdSlipStatus" role="status" aria-live="polite" hidden></p>
+    <div class="fd-slot"><div class="fd-slot-l" id="fdSlipWhoL">Who</div><div class="fd-chips" id="fdSlipWho"></div></div>
+    <div class="fd-slot"><div class="fd-slot-l" id="fdSlipWhyL">Why</div><div class="fd-chips" id="fdSlipWhy"></div></div>
+    <div class="fd-slot"><div class="fd-slot-l" id="fdSlipToL">To</div><div class="fd-chips" id="fdSlipTo"></div></div>
+    <div class="fd-slot"><div class="fd-slot-l" id="fdSlipUrgL">Urgent</div><div class="fd-chips" id="fdSlipUrg"></div></div>
+    <pre class="fd-sms" id="fdSlipSms"></pre>
+    <div class="fd-row">
+      <button type="button" class="fd-btn fd-btn--sm" id="fdSlipSave">Save on this phone</button>
+      <button type="button" class="fd-btn fd-btn--sm" id="fdSlipCopy">Copy text</button>
+    </div>
+    <p class="fd-human" id="fdSlipHuman"></p>
+    <button type="button" class="fd-btn fd-btn--primary fd-btn--wide" id="fdSlipSend" disabled>Open SMS app</button>
+  </section>
+
+  <!-- what is on this phone: saved slips and kept recordings, with export and delete; collapsed, shown only when there is something -->
+  <details class="fd-card fd-more" id="fdMore" hidden>
+    <summary id="fdMoreT"></summary>
+    <h2 class="fd-h2" id="fdLogTitle">Slips on this phone</h2>
+    <ol class="fd-log" id="fdLogList"></ol>
+    <p class="fd-help" id="fdLogExpiry"></p>
+    <div class="fd-row">
+      <button type="button" class="fd-btn fd-btn--sm" id="fdLogClear">Delete all slips</button>
+    </div>
+    <p class="fd-help" id="fdDonateCount" style="margin-top:12px"></p>
+    <div class="fd-row">
+      <button type="button" class="fd-btn fd-btn--sm" id="fdDonateExport"></button>
+      <button type="button" class="fd-btn fd-btn--sm" id="fdDonateClear"></button>
+    </div>
+    <p class="fd-status" id="fdLogStatus" role="status" aria-live="polite" hidden></p>
+  </details>
+
+  <!-- voice needs a one-time download: said before any data is spent, and never in the way of a typed question -->
+  <div class="fd-card fd-card--voice" id="fdVoiceNotice" hidden>
+    <p class="fd-help" id="fdVoiceNeeds"></p>
+    <progress class="fd-progress" id="fdVoiceProgress" max="100" value="0" hidden></progress>
+    <button type="button" class="fd-btn fd-btn--sm" id="fdVoiceDownload"></button>
+  </div>
+
+  <footer class="fd-foot">
+    <p class="fd-privacy" id="fdPrivacy"></p>
+    <p id="fdAi"></p>
+    <p id="fdFoot"></p>
+    <p class="fd-draft" id="fdDraft"></p>
+    <p><a id="fdMapHome" href="/">Planner's map (needs internet)</a></p>
+  </footer>
+</main>
+<script type="module" src="/src/finder/main.ts"></script>
+</body>
+</html>

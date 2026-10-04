@@ -1,0 +1,26 @@
+# dependencies / build output
+node_modules/
+frontend/dist/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.venv/
+
+# secrets and local config: never commit
+.env
+.env.local
+frontend/.env.local
+deploy/certs/
+
+# raw downloads (about 3 GB), rebuilt by pipeline/fetch_sources.py and fetch_open_buildings.py
+pipeline/raw/
+
+# a local backup made during the 4 October simplification
+backup-*.tgz
+_src_snapshot.tgz
+
+# NOTE: data/ (about 250 KB) IS committed on purpose: versioned files, immutable cache headers.
+# frontend/public/models/ and /ort/ (about 68 MB) are committed on purpose too: the build
+# needs them and every file is under GitHub's 100 MB limit. Re-create with
+# pipeline/fetch_models.py and `npm run prepare-offline`.
