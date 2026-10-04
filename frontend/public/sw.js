@@ -29,6 +29,18 @@ function isModelFile(pathname) {
   return pathname.startsWith('/models/') || pathname.startsWith('/ort/') || pathname.startsWith('/voice/');
 }
 
+/**
+ * Remote voice mode (VITE_VOICE_REMOTE=1 at build time): the model files come from Hugging Face and
+ * the ONNX runtime from onnxruntime-web's CDN copy. Those two hosts answer with CORS headers, so
+ * their responses can be stored like our own; nothing else cross-origin is ever cached.
+ */
+function isRemoteModelFile(url) {
+  const p = url.pathname;
+  if (url.hostname === 'huggingface.co' || url.hostname.endsWith('.hf.co') || url.hostname.endsWith('.huggingface.co')) return p.includes('whisper-tiny') || p.includes('/onnx/') || /\.(onnx|json)$/.test(p);
+  if (url.hostname === 'cdn.jsdelivr.net') return p.includes('onnxruntime-web') && /\.(wasm|mjs|js)$/.test(p);
+  return false;
+}
+
 /** the hashed script and stylesheet files the page references (Vite renames them on every build) */
 async function pageAssets(cache) {
   const page = await cache.match(PAGE);
@@ -66,7 +78,19 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
-  if (url.origin !== self.location.origin) return;
+  if (url.origin !== self.location.origin) {
+    if (!isRemoteModelFile(url)) return;
+    event.respondWith(
+      caches.match(req).then((hit) => {
+        if (hit) return hit;
+        return fetch(req).then((res) => {
+          if (res.ok && res.type === 'cors') store(MODELS, req, res);
+          return res;
+        });
+      }),
+    );
+    return;
+  }
 
   if (req.mode === 'navigate') {
     // the finder page is kept fresh online; with no network, any navigation lands on the saved finder

@@ -24,8 +24,19 @@ type Transcriber = (audio: Float32Array, opts: Record<string, unknown>) => Promi
 
 let transcriberPromise: Promise<Transcriber> | null = null;
 
+/**
+ * Where the model and the runtime come from. Default: this site (/models/ and /ort/, no third
+ * party, strict CSP). A host that refuses files of 27 and 31 MB (some app builders do) can set
+ * VITE_VOICE_REMOTE=1 at build time: the same files then come from the model's public home on
+ * Hugging Face (onnx-community/whisper-tiny, MIT) and onnxruntime-web's CDN copy on first use,
+ * and the service worker keeps them for offline use exactly as before. Same model, same sizes.
+ */
+export const VOICE_REMOTE = import.meta.env.VITE_VOICE_REMOTE === '1';
+const MODEL_ID = VOICE_REMOTE ? 'onnx-community/whisper-tiny' : 'whisper-tiny';
 /** the model's largest file: when it is in the service worker's cache, voice works offline */
-const DECODER_URL = '/models/whisper-tiny/onnx/decoder_model_merged_quantized.onnx';
+const DECODER_URL = VOICE_REMOTE
+  ? 'https://huggingface.co/onnx-community/whisper-tiny/resolve/main/onnx/decoder_model_merged_quantized.onnx'
+  : '/models/whisper-tiny/onnx/decoder_model_merged_quantized.onnx';
 const WASM_URL = '/ort/ort-wasm-simd-threaded.asyncify.wasm';
 
 export function speechSupported(): boolean {
@@ -36,8 +47,10 @@ export function speechSupported(): boolean {
 export async function voiceCached(): Promise<boolean> {
   try {
     if (!('caches' in window)) return false;
-    const [a, b] = await Promise.all([caches.match(DECODER_URL), caches.match(WASM_URL)]);
-    return !!a && !!b;
+    const a = await caches.match(DECODER_URL);
+    // the runtime is served by this site unless the remote mode is on (then it is cached under its CDN URL)
+    const b = VOICE_REMOTE ? true : !!(await caches.match(WASM_URL));
+    return !!a && b;
   } catch {
     return false;
   }
@@ -58,8 +71,8 @@ export function loadTranscriber(onProgress?: (pct: number) => void): Promise<Tra
   if (transcriberPromise) return transcriberPromise;
   transcriberPromise = (async () => {
     const tf = await import('@huggingface/transformers');
-    tf.env.allowRemoteModels = false;
-    tf.env.allowLocalModels = true;
+    tf.env.allowRemoteModels = VOICE_REMOTE;
+    tf.env.allowLocalModels = !VOICE_REMOTE;
     tf.env.localModelPath = '/models/';
     // the service worker is the one offline store: no second copy of the model in transformers.js's own cache
     tf.env.useBrowserCache = false;
@@ -67,12 +80,13 @@ export function loadTranscriber(onProgress?: (pct: number) => void): Promise<Tra
     (tf.env as unknown as { useWasmCache?: boolean }).useWasmCache = false;
     const onnx = (tf.env.backends as { onnx?: { wasm?: Record<string, unknown> } }).onnx;
     if (onnx?.wasm) {
-      onnx.wasm.wasmPaths = { mjs: '/ort/ort-wasm-simd-threaded.asyncify.mjs', wasm: WASM_URL };
+      // local mode: the runtime from this site; remote mode: transformers.js's own CDN path for it
+      if (!VOICE_REMOTE) onnx.wasm.wasmPaths = { mjs: '/ort/ort-wasm-simd-threaded.asyncify.mjs', wasm: WASM_URL };
       onnx.wasm.numThreads = 1;
     }
     // progress as one number: bytes of the files seen so far, weighted by their known sizes
     const seen = new Map<string, number>();
-    const pipe = await tf.pipeline('automatic-speech-recognition', 'whisper-tiny', {
+    const pipe = await tf.pipeline('automatic-speech-recognition', MODEL_ID, {
       dtype: { encoder_model: 'q8', decoder_model_merged: 'q8' },
       device: 'wasm',
       progress_callback: (p: { status?: string; file?: string; progress?: number }) => {

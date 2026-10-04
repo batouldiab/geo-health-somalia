@@ -16,6 +16,9 @@ deploy/certs/
 # raw downloads (about 3 GB), rebuilt by pipeline/fetch_sources.py and fetch_open_buildings.py
 pipeline/raw/
 
+# the Lovable-shaped copy of the project (frontend/scripts/make-lovable-repo.mjs)
+_lovable/
+
 # a local backup made during the 4 October simplification
 backup-*.tgz
 _src_snapshot.tgz

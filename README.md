@@ -197,7 +197,9 @@ npm run build                  # dist/ is a complete static site, data included
 node scripts/test-matcher.mjs  # the matcher test (about 4 minutes)
 ```
 
-Microphones and service workers need HTTPS or `localhost`. To use the finder from a phone on the same
+To host it: any HTTPS static host serves `frontend/dist/` as is (Netlify, GitHub Pages, the Nginx configuration in
+`deploy/`); for Lovable, `node scripts/make-lovable-repo.mjs` assembles the layout it expects, see
+`docs/deploy-lovable.md`. Microphones and service workers need HTTPS or `localhost`. To use the finder from a phone on the same
 network during development: `npm run build && npx vite preview --host`, then on the phone `adb reverse
 tcp:4173 tcp:4173` and open `http://localhost:4173/finder.html`; or deploy `dist/` to any HTTPS static host
 (`deploy/` has an Nginx configuration with the headers the speech runtime needs: `microphone=(self)`,
