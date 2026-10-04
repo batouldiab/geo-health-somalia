@@ -37,13 +37,30 @@ cpSync(path.join(repo, 'README.md'), path.join(out, 'README.md'));
 cpSync(path.join(repo, 'pipeline', 'sources.yaml'), path.join(out, 'docs', 'sources.yaml'));
 
 // vite.config.ts without the ../data plugins: public/data is served at /data and copied to dist by Vite itself
-writeFileSync(path.join(out, 'vite.config.ts'), `import { defineConfig } from 'vite';
+writeFileSync(path.join(out, 'vite.config.ts'), `import { defineConfig, loadEnv, type Plugin } from 'vite';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 
-export default defineConfig({
+// in remote voice mode (VITE_VOICE_REMOTE=1 in .env) the ONNX runtime comes from onnxruntime-web's
+// CDN copy, so the 27 MB .wasm the bundler emits for it is never requested: leave it out of the build
+function dropBundledRuntime(remoteVoice: boolean): Plugin {
+  return {
+    name: 'drop-bundled-runtime',
+    apply: 'build',
+    generateBundle(_, bundle) {
+      if (!remoteVoice) return;
+      for (const name of Object.keys(bundle)) if (/ort-wasm.*\.wasm$/.test(name)) delete bundle[name];
+    },
+  };
+}
+
+export default defineConfig(({ mode }) => ({
+  plugins: [dropBundledRuntime(loadEnv(mode, here, '').VITE_VOICE_REMOTE === '1')],
+  // the app builder's preview reaches the dev server on port 8080, on every interface, through its own host name
+  server: { host: '::', port: 8080, allowedHosts: true },
+  preview: { host: '::', port: 8080, allowedHosts: true },
   // transformers.js (speech in the finder) ships WebAssembly and workers that Vite's
   // dependency pre-bundling breaks; it is loaded as is
   optimizeDeps: {
@@ -59,7 +76,7 @@ export default defineConfig({
       },
     },
   },
-});
+}));
 `);
 
 // package.json: a Node version for the builder, and a build that does not need a separate typecheck step
